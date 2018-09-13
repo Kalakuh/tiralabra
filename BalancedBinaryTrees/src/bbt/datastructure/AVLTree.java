@@ -29,6 +29,20 @@ public class AVLTree<T> extends BinaryTree {
         }
         // update height of subtree
         this.updateHeight();
+        checkAVLCondition();
+    }
+
+    @Override
+    public void erase(Comparable element) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    /**
+     * Checks if the AVL condition is violated and then possibly fixes it.
+     * AVL condition says that the absolute difference between the height of
+     * the left and right subtree should not be more than one
+     */
+    private void checkAVLCondition () {
         int leftSubtreeHeight = 0;
         int rightSubtreeHeight = 0;
         if (this.getLeftChild() != null) {
@@ -72,11 +86,6 @@ public class AVLTree<T> extends BinaryTree {
             
             this.updateHeight();
         }
-    }
-
-    @Override
-    public void erase(Comparable element) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     /**
