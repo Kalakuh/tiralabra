@@ -37,4 +37,20 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     protected void setValueAtRoot (T newValue) {
         this.value = newValue;
     }
+    
+    protected BinaryTree<T> getLeftChild () {
+        return this.leftChild;
+    }
+    
+    protected void setLeftChild (BinaryTree<T> tree) {
+        this.leftChild = tree;
+    }
+    
+    protected BinaryTree<T> getRightChild () {
+        return this.rightChild;
+    }
+    
+    protected void setRightChild (BinaryTree<T> tree) {
+        this.rightChild = tree;
+    }
 }
