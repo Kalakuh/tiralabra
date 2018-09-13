@@ -36,7 +36,7 @@ public class AVLTree<T> extends BinaryTree {
         if (this.getRightChild() != null) {
             rightSubtreeHeight = ((AVLTree<T>)this.getRightChild()).getHeight();
         }
-        // tree rotations need to be implemented
+        // tree rotations
         if (Math.abs(leftSubtreeHeight - rightSubtreeHeight) > 1) {
             if (leftSubtreeHeight > rightSubtreeHeight) {
                 AVLTree<T> leftChild = (AVLTree<T>)this.getLeftChild();
