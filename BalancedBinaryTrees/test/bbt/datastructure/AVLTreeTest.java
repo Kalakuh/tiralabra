@@ -45,7 +45,34 @@ public class AVLTreeTest {
         instance.insert(2);
         assertTrue(instance.contains(2));
         instance.erase(1);
-        assertTrue(!instance.contains(2));
+        assertTrue(!instance.contains(1));
+        assertTrue(instance.contains(2));
+    }
+    
+    /**
+     * Test erasing on larger trees 
+     */
+    @Test
+    public void testInsertAndEraseLarger() {
+        instance.insert(0);
+        instance.insert(1);
+        instance.insert(2);
+        instance.insert(3);
+        instance.insert(4);
+        instance.insert(8);
+        instance.insert(7);
+        instance.insert(6);
+        instance.insert(5);
+        instance.erase(3);
+        assertTrue(!instance.contains(3));
+        assertTrue(instance.contains(0));
+        assertTrue(instance.contains(1));
+        assertTrue(instance.contains(2));
+        assertTrue(instance.contains(4));
+        assertTrue(instance.contains(5));
+        assertTrue(instance.contains(6));
+        assertTrue(instance.contains(7));
+        assertTrue(instance.contains(8));
     }
     
 }

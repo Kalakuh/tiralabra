@@ -34,7 +34,53 @@ public class AVLTree<T> extends BinaryTree {
 
     @Override
     public boolean erase(Comparable element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
+        // find the location where the node should be erased
+        boolean erased = false;
+        if (this.getValueAtRoot() == null) {
+            return false;
+        } else if (this.getValueAtRoot().compareTo(element) == 0) {
+            erased = true;
+            this.eraseAnalysis();
+        } else if (this.getValueAtRoot().compareTo(element) > 0) {
+            if (this.getLeftChild() != null) {
+                erased = this.getLeftChild().erase(element);
+            }
+        } else {
+            if (this.getRightChild() != null) {
+                erased = this.getRightChild().erase(element);
+            }
+        }
+        checkAVLCondition();
+        return erased;
+    }
+    
+    private T eraseAnalysis () {
+        T value = (T)this.getValueAtRoot();
+        if (this.getLeftChild() != null && this.getRightChild() != null) {
+            this.setValueAtRoot((Comparable)((AVLTree<T>)this.getRightChild()).eraseLeftmost());
+        } else if (this.getLeftChild() != null) {
+            this.setValueAtRoot(this.getLeftChild().getValueAtRoot());
+            this.setRightChild(this.getLeftChild().getRightChild());
+            this.setLeftChild(this.getLeftChild().getLeftChild());
+        } else if (this.getRightChild() != null) {
+            this.setValueAtRoot(this.getRightChild().getValueAtRoot());
+            this.setLeftChild(this.getRightChild().getLeftChild());
+            this.setRightChild(this.getRightChild().getRightChild());
+        } else {
+            this.setValueAtRoot(null);
+        }
+        this.checkAVLCondition();
+        return value;
+    }
+    
+    private T eraseLeftmost () {
+        if (this.getLeftChild() != null) {
+            return ((AVLTree<T>)this.getLeftChild()).eraseLeftmost();
+        }
+        return this.eraseAnalysis();
     }
     
     /**
@@ -43,6 +89,7 @@ public class AVLTree<T> extends BinaryTree {
      * the left and right subtree should not be more than one.
      */
     private void checkAVLCondition () {
+        this.updateHeight();
         int leftSubtreeHeight = 0;
         int rightSubtreeHeight = 0;
         if (this.getLeftChild() != null) {
@@ -106,10 +153,18 @@ public class AVLTree<T> extends BinaryTree {
         }
         this.height = 1;
         if (this.getLeftChild() != null) {
-            this.height = Math.max(this.height, ((AVLTree<T>)this.getLeftChild()).getHeight() + 1);
+            if (this.getLeftChild().getValueAtRoot() == null) {
+                this.setLeftChild(null);
+            } else {
+                this.height = Math.max(this.height, ((AVLTree<T>)this.getLeftChild()).getHeight() + 1);
+            }
         }
         if (this.getRightChild() != null) {
-            this.height = Math.max(this.height, ((AVLTree<T>)this.getRightChild()).getHeight() + 1);
+            if (this.getRightChild().getValueAtRoot() == null) {
+                this.setRightChild(null);
+            } else {
+                this.height = Math.max(this.height, ((AVLTree<T>)this.getRightChild()).getHeight() + 1);
+            }
         }
     }
     
