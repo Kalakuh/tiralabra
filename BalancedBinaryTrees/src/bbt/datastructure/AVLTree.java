@@ -5,6 +5,9 @@ public class AVLTree<T> extends BinaryTree {
     
     @Override
     public void insert(Comparable element) {
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
         if (this.getValueAtRoot() == null) {
             this.setValueAtRoot(element);
         } else if (this.getValueAtRoot().compareTo(element) >= 0) {
@@ -18,7 +21,7 @@ public class AVLTree<T> extends BinaryTree {
             }
             this.getRightChild().insert(element);
         }
-        // tree rotations
+        // tree rotations need to be implemented
     }
 
     @Override
