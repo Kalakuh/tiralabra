@@ -29,7 +29,7 @@ public class AVLTree<T> extends BinaryTree {
         }
         // update height of subtree
         this.updateHeight();
-        checkAVLCondition();
+        this.checkAVLCondition();
     }
 
     @Override
