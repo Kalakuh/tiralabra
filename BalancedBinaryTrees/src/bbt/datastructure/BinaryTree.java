@@ -43,8 +43,9 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     /**
      * Erases the given element from the tree. This deletes a single instance of the element.
      * @param element The value to be erased
+     * @return Returns true if value was found and erased
      */
-    public abstract void erase (T element);
+    public abstract boolean erase (T element);
     
     /**
      * Returns the value of the tree

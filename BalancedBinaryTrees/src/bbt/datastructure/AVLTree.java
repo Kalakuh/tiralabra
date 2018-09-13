@@ -33,14 +33,14 @@ public class AVLTree<T> extends BinaryTree {
     }
 
     @Override
-    public void erase(Comparable element) {
+    public boolean erase(Comparable element) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
     /**
      * Checks if the AVL condition is violated and then possibly fixes it.
      * AVL condition says that the absolute difference between the height of
-     * the left and right subtree should not be more than one
+     * the left and right subtree should not be more than one.
      */
     private void checkAVLCondition () {
         int leftSubtreeHeight = 0;
