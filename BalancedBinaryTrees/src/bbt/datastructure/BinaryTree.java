@@ -1,4 +1,4 @@
-package bbt.datastructures;
+package bbt.datastructure;
 
 public abstract class BinaryTree<T extends Comparable<T>> {
     private BinaryTree<T> leftChild;

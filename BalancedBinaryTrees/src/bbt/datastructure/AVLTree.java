@@ -1,4 +1,4 @@
-package bbt.datastructures;
+package bbt.datastructure;
 
 public class AVLTree<T> extends BinaryTree {
     private int height;

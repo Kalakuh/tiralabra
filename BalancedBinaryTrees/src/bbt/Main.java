@@ -1,6 +1,7 @@
 package bbt;
 
-import bbt.datastructures.*;
+import bbt.datastructure.AVLTree;
+import bbt.datastructure.BinaryTree;
 
 public class Main {
     /**
