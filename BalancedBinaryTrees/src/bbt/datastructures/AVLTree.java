@@ -26,4 +26,7 @@ public class AVLTree<T> extends BinaryTree {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    private int getHeight () {
+        return this.height;
+    }
 }
