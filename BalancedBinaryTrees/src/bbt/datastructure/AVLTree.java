@@ -3,6 +3,9 @@ package bbt.datastructure;
 public class AVLTree<T> extends BinaryTree {
     private int height;
     
+    /**
+     * Parameterless constructor for the AVLTree
+     */
     public AVLTree () {
         super();
         this.height = 0;
@@ -53,10 +56,14 @@ public class AVLTree<T> extends BinaryTree {
                 erased = this.getRightChild().erase(element);
             }
         }
-        checkAVLCondition();
+        this.checkAVLCondition();
         return erased;
     }
     
+    /**
+     * Does the case analysis for deletion
+     * @return Returns the value that should be erased and moved upwards
+     */
     private T eraseAnalysis () {
         T value = (T)this.getValueAtRoot();
         if (this.getLeftChild() != null && this.getRightChild() != null) {
@@ -76,6 +83,10 @@ public class AVLTree<T> extends BinaryTree {
         return value;
     }
     
+    /**
+     * Finds the leftmost (and thus smallest) node of the subtree and then calls eraseAnalysis to delete it
+     * @return Returns the value that should be moved upwards in the binary tree
+     */
     private T eraseLeftmost () {
         if (this.getLeftChild() != null) {
             return ((AVLTree<T>)this.getLeftChild()).eraseLeftmost();
