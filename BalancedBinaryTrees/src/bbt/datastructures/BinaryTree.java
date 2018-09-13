@@ -5,6 +5,11 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     private BinaryTree<T> rightChild;
     private T value;
     
+    public BinaryTree () {
+        this.leftChild = null;
+        this.rightChild = null;
+    }
+    
     public abstract void insert (T element);
     
     public boolean contains (T element) {
@@ -25,11 +30,11 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     
     public abstract void erase (T element);
     
-    public T getValueAtRoot () {
+    protected T getValueAtRoot () {
         return this.value;
     }
     
-    public void setValueAtRoot (T newValue) {
+    protected void setValueAtRoot (T newValue) {
         this.value = newValue;
     }
 }
