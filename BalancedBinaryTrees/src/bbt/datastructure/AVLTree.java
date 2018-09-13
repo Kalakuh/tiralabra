@@ -13,6 +13,7 @@ public class AVLTree<T> extends BinaryTree {
         if (element == null) {
             throw new IllegalArgumentException();
         }
+        // find the location where the node should be inserted
         if (this.getValueAtRoot() == null) {
             this.setValueAtRoot(element);
         } else if (this.getValueAtRoot().compareTo(element) >= 0) {
@@ -26,7 +27,7 @@ public class AVLTree<T> extends BinaryTree {
             }
             this.getRightChild().insert(element);
         }
-        // update height
+        // update height of subtree
         this.updateHeight();
         int leftSubtreeHeight = 0;
         int rightSubtreeHeight = 0;
@@ -38,6 +39,7 @@ public class AVLTree<T> extends BinaryTree {
         }
         // tree rotations
         if (Math.abs(leftSubtreeHeight - rightSubtreeHeight) > 1) {
+            // AVL condition is violated
             if (leftSubtreeHeight > rightSubtreeHeight) {
                 AVLTree<T> leftChild = (AVLTree<T>)this.getLeftChild();
                 if (leftChild.getRightChild() != null) {
