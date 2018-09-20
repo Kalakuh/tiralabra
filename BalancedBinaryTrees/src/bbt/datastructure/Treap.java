@@ -10,7 +10,7 @@ public class Treap<T> extends BinaryTree {
      */
     public Treap () {
         Random random = new Random();
-        this.priority = random.nextInt();
+        this.priority = Math.abs(random.nextInt());
     }
 
     @Override
@@ -57,6 +57,9 @@ public class Treap<T> extends BinaryTree {
         }
         if (this.getRightChild() != null) {
             int rightPriority = ((Treap<T>)this.getRightChild()).getPriority();
+            if (rightPriority > this.priority) {
+                this.rotateCounterclockwise();
+            }
         }
     }
     
