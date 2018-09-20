@@ -216,4 +216,18 @@ public abstract class BinaryTree<T extends Comparable<T>> {
         right.setValueAtRoot(rootValue);
         this.setLeftChild(right);
     }
+    
+    /**
+     * Removes everything from the tree
+     */
+    public void clear () {
+        this.value = null;
+        if (this.leftChild != null) {
+            this.leftChild.clear();
+        }
+        if (this.rightChild != null) {
+            this.rightChild.clear();
+        }
+        this.leftChild = this.rightChild = null;
+    }
 }

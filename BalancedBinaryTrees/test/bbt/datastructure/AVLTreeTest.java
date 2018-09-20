@@ -138,4 +138,15 @@ public class AVLTreeTest {
         instance.insert(5);
         avlConditionHelper(instance);
     }
+    
+    /**
+     * Tests clearing the tree - if this works for AVL then we can assume it works for everything, since it's implemented in BinaryTree
+     */
+    @Test
+    public void testClear () {
+        instance.insert(1);
+        instance.insert(2);
+        instance.clear();
+        assertTrue(!instance.contains(2));
+    }
 }

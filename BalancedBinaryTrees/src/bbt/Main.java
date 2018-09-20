@@ -21,5 +21,10 @@ public class Main {
         System.out.println("Tree contains 1: " + tree.contains(1));
         System.out.println("Tree contains 2: " + tree.contains(2));
         System.out.println("Tree contains 3: " + tree.contains(3));
+        tree.clear();
+        System.out.println("Tree contains 0: " + tree.contains(0));
+        System.out.println("Tree contains 1: " + tree.contains(1));
+        System.out.println("Tree contains 2: " + tree.contains(2));
+        System.out.println("Tree contains 3: " + tree.contains(3));
     }
 }
