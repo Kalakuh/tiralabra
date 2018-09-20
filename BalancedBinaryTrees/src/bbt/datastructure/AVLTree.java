@@ -18,67 +18,12 @@ public class AVLTree<T> extends BinaryTree {
     
     @Override
     protected void insertCallback () {
-        this.updateHeight();
         this.checkAVLCondition();
     }
-
+    
     @Override
-    public boolean erase(Comparable element) {
-        if (element == null) {
-            throw new IllegalArgumentException();
-        }
-        // find the location where the node should be erased
-        boolean erased = false;
-        if (this.getValueAtRoot() == null) {
-            return false;
-        } else if (this.getValueAtRoot().compareTo(element) == 0) {
-            erased = true;
-            this.eraseAnalysis();
-        } else if (this.getValueAtRoot().compareTo(element) > 0) {
-            if (this.getLeftChild() != null) {
-                erased = this.getLeftChild().erase(element);
-            }
-        } else {
-            if (this.getRightChild() != null) {
-                erased = this.getRightChild().erase(element);
-            }
-        }
+    protected void eraseCallback() {
         this.checkAVLCondition();
-        return erased;
-    }
-    
-    /**
-     * Does the case analysis for deletion
-     * @return Returns the value that should be erased and moved upwards
-     */
-    private T eraseAnalysis () {
-        T value = (T)this.getValueAtRoot();
-        if (this.getLeftChild() != null && this.getRightChild() != null) {
-            this.setValueAtRoot((Comparable)((AVLTree<T>)this.getRightChild()).eraseLeftmost());
-        } else if (this.getLeftChild() != null) {
-            this.setValueAtRoot(this.getLeftChild().getValueAtRoot());
-            this.setRightChild(this.getLeftChild().getRightChild());
-            this.setLeftChild(this.getLeftChild().getLeftChild());
-        } else if (this.getRightChild() != null) {
-            this.setValueAtRoot(this.getRightChild().getValueAtRoot());
-            this.setLeftChild(this.getRightChild().getLeftChild());
-            this.setRightChild(this.getRightChild().getRightChild());
-        } else {
-            this.setValueAtRoot(null);
-        }
-        this.checkAVLCondition();
-        return value;
-    }
-    
-    /**
-     * Finds the leftmost (and thus smallest) node of the subtree and then calls eraseAnalysis to delete it
-     * @return Returns the value that should be moved upwards in the binary tree
-     */
-    private T eraseLeftmost () {
-        if (this.getLeftChild() != null) {
-            return ((AVLTree<T>)this.getLeftChild()).eraseLeftmost();
-        }
-        return this.eraseAnalysis();
     }
     
     /**

@@ -24,6 +24,11 @@ public class Treap<T> extends BinaryTree {
     }
     
     @Override
+    protected void eraseCallback() {
+        this.checkHeapCondition();
+    }
+    
+    @Override
     public boolean erase(Comparable element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
