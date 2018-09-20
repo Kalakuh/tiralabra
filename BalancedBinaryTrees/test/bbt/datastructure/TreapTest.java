@@ -4,12 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class AVLTreeTest {
-    private AVLTree<Integer> instance;
+/**
+ *
+ * @author Juha
+ */
+public class TreapTest {
+    private BinaryTree<Integer> instance;
     
     @Before
     public void setUp() {
-        instance = new AVLTree<>();
+        instance = new Treap<>();
     }
     
     /**
@@ -73,5 +77,5 @@ public class AVLTreeTest {
         assertTrue(instance.contains(6));
         assertTrue(instance.contains(7));
         assertTrue(instance.contains(8));
-    }   
+    }
 }
