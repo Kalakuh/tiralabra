@@ -94,4 +94,34 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     protected void setRightChild (BinaryTree<T> tree) {
         this.rightChild = tree;
     }
+    
+    /**
+     * Rotates the tree clockwise
+     */
+    protected void rotateClockwise () {
+        BinaryTree<T> left = this.getLeftChild();
+        T rootValue = this.getValueAtRoot();
+        T leftValue = left.getValueAtRoot();
+        this.setValueAtRoot(leftValue);
+        this.setLeftChild(left.getLeftChild());
+        left.setLeftChild(left.getRightChild());
+        left.setRightChild(this.getRightChild());
+        left.setValueAtRoot(rootValue);
+        this.setRightChild(left);
+    }
+    
+    /**
+     * Rotates the tree counterclockwise
+     */
+    protected void rotateCounterclockwise () {
+        BinaryTree<T> right = this.getRightChild();
+        T rootValue = this.getValueAtRoot();
+        T rightValue = right.getValueAtRoot();
+        this.setValueAtRoot(rightValue);
+        this.setRightChild(right.getRightChild());
+        right.setRightChild(right.getLeftChild());
+        right.setLeftChild(this.getLeftChild());
+        right.setValueAtRoot(rootValue);
+        this.setLeftChild(right);
+    }
 }

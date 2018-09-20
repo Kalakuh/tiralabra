@@ -182,34 +182,20 @@ public class AVLTree<T> extends BinaryTree {
     /**
      * Rotates the tree clockwise as a part of maintaining the AVL condition
      */
-    private void rotateClockwise () {
-        AVLTree left = (AVLTree)this.getLeftChild();
-        Comparable rootValue = this.getValueAtRoot();
-        Comparable leftValue = left.getValueAtRoot();
-        this.setValueAtRoot(leftValue);
-        this.setLeftChild(left.getLeftChild());
-        left.setLeftChild(left.getRightChild());
-        left.setRightChild((AVLTree)this.getRightChild());
-        left.setValueAtRoot(rootValue);
-        this.setRightChild(left);
+    @Override
+    protected void rotateClockwise () {
+        super.rotateClockwise();
         this.updateHeight();
-        left.updateHeight();
+        ((AVLTree<T>)this.getRightChild()).updateHeight();
     }
     
     /**
      * Rotates the tree counterclockwise as a part of maintaining the AVL condition
      */
-    private void rotateCounterclockwise () {
-        AVLTree right = (AVLTree)this.getRightChild();
-        Comparable rootValue = this.getValueAtRoot();
-        Comparable rightValue = right.getValueAtRoot();
-        this.setValueAtRoot(rightValue);
-        this.setRightChild(right.getRightChild());
-        right.setRightChild(right.getLeftChild());
-        right.setLeftChild((AVLTree)this.getLeftChild());
-        right.setValueAtRoot(rootValue);
-        this.setLeftChild(right);
+    @Override
+    protected void rotateCounterclockwise () {
+        super.rotateCounterclockwise();
         this.updateHeight();
-        right.updateHeight();
+        ((AVLTree<T>)this.getLeftChild()).updateHeight();
     }
 }
