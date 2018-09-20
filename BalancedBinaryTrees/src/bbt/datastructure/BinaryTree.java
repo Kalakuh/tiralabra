@@ -14,10 +14,41 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
+     * Function that should return a new instance of the used Tree type
+     * @return New instance of the used tree type
+     */
+    protected abstract BinaryTree<T> create ();
+    
+    /**
      * Inserts the given element to the tree.
      * @param element The value to be inserted
      */
-    public abstract void insert (T element);
+    public void insert(T element) {
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
+        // find the location where the node should be inserted
+        if (this.getValueAtRoot() == null) {
+            this.setValueAtRoot(element);
+        } else if (this.getValueAtRoot().compareTo(element) >= 0) {
+            if (this.getLeftChild() == null) {
+                this.setLeftChild(this.create());
+            }
+            this.getLeftChild().insert(element);
+        } else {
+            if (this.getRightChild() == null) {
+                this.setRightChild(this.create());
+            }
+            this.getRightChild().insert(element);
+        }
+        this.insertCallback();
+    }
+    
+    
+    /**
+     * Function that's called just before insert returns
+     */
+    protected abstract void insertCallback ();
     
     /**
      * Checks whether the given parameter can be found in the tree

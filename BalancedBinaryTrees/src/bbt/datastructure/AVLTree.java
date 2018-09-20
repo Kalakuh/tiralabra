@@ -12,25 +12,12 @@ public class AVLTree<T> extends BinaryTree {
     }
     
     @Override
-    public void insert(Comparable element) {
-        if (element == null) {
-            throw new IllegalArgumentException();
-        }
-        // find the location where the node should be inserted
-        if (this.getValueAtRoot() == null) {
-            this.setValueAtRoot(element);
-        } else if (this.getValueAtRoot().compareTo(element) >= 0) {
-            if (this.getLeftChild() == null) {
-                this.setLeftChild(new AVLTree());
-            }
-            this.getLeftChild().insert(element);
-        } else {
-            if (this.getRightChild() == null) {
-                this.setRightChild(new AVLTree());
-            }
-            this.getRightChild().insert(element);
-        }
-        // update height of subtree
+    protected BinaryTree create () {
+        return new AVLTree<>();
+    }
+    
+    @Override
+    protected void insertCallback () {
         this.updateHeight();
         this.checkAVLCondition();
     }
