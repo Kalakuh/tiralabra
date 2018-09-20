@@ -2,13 +2,14 @@ package bbt;
 
 import bbt.datastructure.AVLTree;
 import bbt.datastructure.BinaryTree;
+import bbt.datastructure.Treap;
 
 public class Main {
     /**
      * @param args the command line arguments
      */
     public static void main (String[] args) {
-        BinaryTree<Integer> tree = new AVLTree<>();
+        BinaryTree<Integer> tree = new Treap<>();
         System.out.println("Tree contains 2: " + tree.contains(2));
         tree.insert(2);
         System.out.println("Tree contains 2: " + tree.contains(2));
