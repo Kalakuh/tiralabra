@@ -15,25 +15,28 @@ public class TreapTest {
         instance = new Treap<>();
     }
     
-    private boolean heapConditionHelper (Treap t) {
+    /**
+     * Checks that the heap condition actually holds for the treap
+     * @param treap Treap to be checked
+     * @return Returns true if the condition holds
+     */
+    private boolean heapConditionHelper (Treap treap) {
         try {
-            if (t == null) return true;
+            if (treap == null) return true;
             try {
-                Method method = t.getClass().getDeclaredMethod("getPriority");
+                Method method = treap.getClass().getDeclaredMethod("getPriority");
                 method.setAccessible(true);
-                if (t.getLeftChild() != null) {
-                    if ((int)method.invoke((Treap)t.getLeftChild()) > (int)method.invoke(t)) {
-                        System.out.println("my " + (int)method.invoke(t) + " his " + (int)method.invoke((Treap)t.getLeftChild()));
+                if (treap.getLeftChild() != null) {
+                    if ((int)method.invoke((Treap)treap.getLeftChild()) > (int)method.invoke(treap)) {
                         return false;
                     }
                 }
-                if (t.getRightChild() != null) {
-                    if ((int)method.invoke((Treap)t.getRightChild()) > (int)method.invoke(t)) {
-                        System.out.println("my " + (int)method.invoke(t) + " his " + (int)method.invoke((Treap)t.getRightChild()));
+                if (treap.getRightChild() != null) {
+                    if ((int)method.invoke((Treap)treap.getRightChild()) > (int)method.invoke(treap)) {
                         return false;
                     }
                 }
-                return heapConditionHelper((Treap)t.getLeftChild()) && heapConditionHelper((Treap)t.getRightChild());
+                return heapConditionHelper((Treap)treap.getLeftChild()) && heapConditionHelper((Treap)treap.getRightChild());
             } catch (IllegalAccessException ex) {
                 Logger.getLogger(TreapTest.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalArgumentException ex) {
@@ -135,6 +138,8 @@ public class TreapTest {
         instance.insert(7);
         instance.insert(6);
         instance.insert(5);
+        instance.erase(4);
+        instance.erase(6);
         assertTrue(heapConditionHelper(instance));
     }
 }
