@@ -35,10 +35,10 @@ public class ScapegoatTree<T> extends BinaryTree {
         }
         boolean findScapegoat = false;
         this.size++;
-        if (this.getValueAtRoot() == null) {
-            this.setValueAtRoot((Comparable)element);
+        if (this.getValue() == null) {
+            this.setValue((Comparable)element);
             findScapegoat = depth > Math.log(treeSize) / Math.log(ALPHA);
-        } else if (this.getValueAtRoot().compareTo((Comparable)element) >= 0) {
+        } else if (this.getValue().compareTo((Comparable)element) >= 0) {
             if (this.getLeftChild() == null) {
                 ScapegoatTree<T> child = new ScapegoatTree<>();
                 child.setParent(this);
@@ -53,9 +53,21 @@ public class ScapegoatTree<T> extends BinaryTree {
             }
             findScapegoat = ((ScapegoatTree<T>)this.getRightChild()).insertHelper(element, depth + 1, treeSize);
         }
-        
         if (findScapegoat && this.parent != null && this.getSize() > ALPHA * this.parent.getSize()) {
+            boolean left = this.getParent().getLeftChild() == this;
             ArrayList<ScapegoatTree<T>> children = this.inOrderTraversal();
+            ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent);
+            
+            ScapegoatTree<T> leftChild = (ScapegoatTree<T>)newThis.getLeftChild();
+            this.setLeftChild(leftChild);
+            this.setRightChild(newThis.getRightChild());
+            this.setParent(newThis.getParent());
+            this.setValue(newThis.getValue());
+            if (left) {
+                this.getParent().setLeftChild(this);
+            } else {
+                this.getParent().setRightChild(this);
+            }
         }
         
         return findScapegoat;
@@ -79,6 +91,43 @@ public class ScapegoatTree<T> extends BinaryTree {
         }
         return nodes;
     }
+    
+    /**
+     * Rebuilds as balanced binary tree as possible
+     * @param <T> type of values in the tree
+     * @param children list of children
+     * @param parent parent of the current node
+     * @return new root of the tree
+     */
+    private static<T> ScapegoatTree<T> rebuild (ArrayList<ScapegoatTree<T>> children, ScapegoatTree<T> parent) {
+        if (children.isEmpty()) {
+            return null;
+        }
+        
+        int mid = children.size() / 2;
+        ArrayList<ScapegoatTree<T>> smaller, larger;
+        smaller = new ArrayList<>();
+        larger = new ArrayList<>();
+        
+        ScapegoatTree<T> tree = new ScapegoatTree<>();
+        ScapegoatTree<T> old = children.get(mid);
+        tree.setLeftChild(old.getLeftChild());
+        tree.setRightChild(old.getRightChild());
+        tree.setValue(old.getValue());
+        tree.setParent(parent);
+        tree.setSize(children.size());
+        
+        for (int i = 0; i < mid; i++) {
+            smaller.add(children.get(i));
+        }
+        for (int i = mid + 1; i < children.size(); i++) {
+            larger.add(children.get(i));
+        }
+        
+        tree.setLeftChild(ScapegoatTree.rebuild(smaller, tree));
+        tree.setRightChild(ScapegoatTree.rebuild(larger, tree));
+        return tree;
+    }
 
     @Override
     protected void insertCallback() {
@@ -101,6 +150,14 @@ public class ScapegoatTree<T> extends BinaryTree {
      */
     private int getSize () {
         return this.size;
+    }
+    
+    /**
+     * Sets the size of the subtree
+     * @param the size of the subtree
+     */
+    private void setSize (int sz) {
+        this.size = sz;
     }
     
     /**
