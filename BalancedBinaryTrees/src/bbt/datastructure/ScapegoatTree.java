@@ -1,5 +1,7 @@
 package bbt.datastructure;
 
+import java.util.ArrayList;
+
 public class ScapegoatTree<T> extends BinaryTree {
     private final double ALPHA = 2.0 / 3.0;
     private int size = 0;
@@ -51,7 +53,31 @@ public class ScapegoatTree<T> extends BinaryTree {
             }
             findScapegoat = ((ScapegoatTree<T>)this.getRightChild()).insertHelper(element, depth + 1, treeSize);
         }
+        
+        if (findScapegoat && this.parent != null && this.getSize() > ALPHA * this.parent.getSize()) {
+            ArrayList<ScapegoatTree<T>> children = this.inOrderTraversal();
+        }
+        
         return findScapegoat;
+    }
+    
+    /**
+     * Returns list of ScapegoatTrees in the order of in-order traversal - first left subtree, then current node and then right subtree
+     * @return list of ScapegoatTrees in in-order order
+     */
+    private ArrayList<ScapegoatTree<T>> inOrderTraversal () {
+        ArrayList<ScapegoatTree<T>> nodes = new ArrayList<>();
+        if (this.getLeftChild() != null) {
+            nodes = ((ScapegoatTree<T>)this.getLeftChild()).inOrderTraversal();
+        }
+        nodes.add(this);
+        if (this.getRightChild() != null) {
+            ArrayList<ScapegoatTree<T>> right = ((ScapegoatTree<T>)this.getRightChild()).inOrderTraversal();
+            for (ScapegoatTree<T> tree : right) {
+                nodes.add(tree);
+            }
+        }
+        return nodes;
     }
 
     @Override
@@ -61,6 +87,11 @@ public class ScapegoatTree<T> extends BinaryTree {
 
     @Override
     protected void eraseCallback() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    protected BinaryTree create() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
