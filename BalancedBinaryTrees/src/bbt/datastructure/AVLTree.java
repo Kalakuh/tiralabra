@@ -90,20 +90,20 @@ public class AVLTree<T> extends BinaryTree {
      * Updates the height variable of the binary tree
      */
     private void updateHeight () {
-        if (this.getValueAtRoot() == null) {
+        if (this.getValue() == null) {
             this.height = 0;
             return;
         }
         this.height = 1;
         if (this.getLeftChild() != null) {
-            if (this.getLeftChild().getValueAtRoot() == null) {
+            if (this.getLeftChild().getValue() == null) {
                 this.setLeftChild(null);
             } else {
                 this.height = Math.max(this.height, ((AVLTree<T>)this.getLeftChild()).getHeight() + 1);
             }
         }
         if (this.getRightChild() != null) {
-            if (this.getRightChild().getValueAtRoot() == null) {
+            if (this.getRightChild().getValue() == null) {
                 this.setRightChild(null);
             } else {
                 this.height = Math.max(this.height, ((AVLTree<T>)this.getRightChild()).getHeight() + 1);

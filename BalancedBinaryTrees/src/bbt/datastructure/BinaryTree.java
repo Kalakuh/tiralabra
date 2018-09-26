@@ -28,9 +28,9 @@ public abstract class BinaryTree<T extends Comparable<T>> {
             throw new IllegalArgumentException();
         }
         // find the location where the node should be inserted
-        if (this.getValueAtRoot() == null) {
-            this.setValueAtRoot(element);
-        } else if (this.getValueAtRoot().compareTo(element) >= 0) {
+        if (this.getValue() == null) {
+            this.setValue(element);
+        } else if (this.getValue().compareTo(element) >= 0) {
             if (this.getLeftChild() == null) {
                 this.setLeftChild(this.create());
             }
@@ -82,12 +82,12 @@ public abstract class BinaryTree<T extends Comparable<T>> {
         }
         // find the location where the node should be erased
         boolean erased = false;
-        if (this.getValueAtRoot() == null) {
+        if (this.getValue() == null) {
             return false;
-        } else if (this.getValueAtRoot().compareTo(element) == 0) {
+        } else if (this.getValue().compareTo(element) == 0) {
             erased = true;
             this.eraseAnalysis();
-        } else if (this.getValueAtRoot().compareTo(element) > 0) {
+        } else if (this.getValue().compareTo(element) > 0) {
             if (this.getLeftChild() != null) {
                 erased = this.getLeftChild().erase(element);
             }
@@ -110,19 +110,19 @@ public abstract class BinaryTree<T extends Comparable<T>> {
      * @return Returns the value that should be erased and moved upwards
      */
     private T eraseAnalysis () {
-        T value = (T)this.getValueAtRoot();
+        T value = (T)this.getValue();
         if (this.getLeftChild() != null && this.getRightChild() != null) {
-            this.setValueAtRoot(this.getRightChild().eraseLeftmost());
+            this.setValue(this.getRightChild().eraseLeftmost());
         } else if (this.getLeftChild() != null) {
-            this.setValueAtRoot(this.getLeftChild().getValueAtRoot());
+            this.setValue(this.getLeftChild().getValue());
             this.setRightChild(this.getLeftChild().getRightChild());
             this.setLeftChild(this.getLeftChild().getLeftChild());
         } else if (this.getRightChild() != null) {
-            this.setValueAtRoot(this.getRightChild().getValueAtRoot());
+            this.setValue(this.getRightChild().getValue());
             this.setLeftChild(this.getRightChild().getLeftChild());
             this.setRightChild(this.getRightChild().getRightChild());
         } else {
-            this.setValueAtRoot(null);
+            this.setValue(null);
         }
         this.eraseCallback();
         return value;
@@ -143,7 +143,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
      * Returns the value of the tree
      * @return The value of the tree
      */
-    protected T getValueAtRoot () {
+    protected T getValue () {
         return this.value;
     }
     
@@ -151,7 +151,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
      * Sets the value of the root
      * @param newValue The new value for the root
      */
-    protected void setValueAtRoot (T newValue) {
+    protected void setValue (T newValue) {
         this.value = newValue;
     }
     
@@ -192,13 +192,13 @@ public abstract class BinaryTree<T extends Comparable<T>> {
      */
     protected void rotateClockwise () {
         BinaryTree<T> left = this.getLeftChild();
-        T rootValue = this.getValueAtRoot();
-        T leftValue = left.getValueAtRoot();
-        this.setValueAtRoot(leftValue);
+        T rootValue = this.getValue();
+        T leftValue = left.getValue();
+        this.setValue(leftValue);
         this.setLeftChild(left.getLeftChild());
         left.setLeftChild(left.getRightChild());
         left.setRightChild(this.getRightChild());
-        left.setValueAtRoot(rootValue);
+        left.setValue(rootValue);
         this.setRightChild(left);
     }
     
@@ -207,13 +207,13 @@ public abstract class BinaryTree<T extends Comparable<T>> {
      */
     protected void rotateCounterclockwise () {
         BinaryTree<T> right = this.getRightChild();
-        T rootValue = this.getValueAtRoot();
-        T rightValue = right.getValueAtRoot();
-        this.setValueAtRoot(rightValue);
+        T rootValue = this.getValue();
+        T rightValue = right.getValue();
+        this.setValue(rightValue);
         this.setRightChild(right.getRightChild());
         right.setRightChild(right.getLeftChild());
         right.setLeftChild(this.getLeftChild());
-        right.setValueAtRoot(rootValue);
+        right.setValue(rootValue);
         this.setLeftChild(right);
     }
     
@@ -229,5 +229,10 @@ public abstract class BinaryTree<T extends Comparable<T>> {
             this.rightChild.clear();
         }
         this.leftChild = this.rightChild = null;
+    }
+    
+    @Override
+    public String toString () {
+        return getClass().getSimpleName() + " (" + getValue() + ")";
     }
 }
