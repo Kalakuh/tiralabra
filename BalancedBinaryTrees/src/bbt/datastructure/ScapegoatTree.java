@@ -1,6 +1,6 @@
 package bbt.datastructure;
 
-import java.util.ArrayList;
+import bbt.util.List;
 
 public class ScapegoatTree<T> extends BinaryTree {
     private final double ALPHA = 2.0 / 3.0;
@@ -61,7 +61,7 @@ public class ScapegoatTree<T> extends BinaryTree {
             findScapegoat = 0;
             
             boolean left = this.getParent().getLeftChild() == this;
-            ArrayList<ScapegoatTree<T>> children = this.inOrderTraversal();
+            List<ScapegoatTree<T>> children = this.inOrderTraversal();
             ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent);
             ScapegoatTree<T> leftChild = (ScapegoatTree<T>)newThis.getLeftChild();
             this.setLeftChild(leftChild);
@@ -84,16 +84,16 @@ public class ScapegoatTree<T> extends BinaryTree {
      * Returns list of ScapegoatTrees in the order of in-order traversal - first left subtree, then current node and then right subtree
      * @return list of ScapegoatTrees in in-order order
      */
-    private ArrayList<ScapegoatTree<T>> inOrderTraversal () {
-        ArrayList<ScapegoatTree<T>> nodes = new ArrayList<>();
+    private List<ScapegoatTree<T>> inOrderTraversal () {
+        List<ScapegoatTree<T>> nodes = new List<>();
         if (this.getLeftChild() != null) {
             nodes = ((ScapegoatTree<T>)this.getLeftChild()).inOrderTraversal();
         }
         nodes.add(this);
         if (this.getRightChild() != null) {
-            ArrayList<ScapegoatTree<T>> right = ((ScapegoatTree<T>)this.getRightChild()).inOrderTraversal();
-            for (ScapegoatTree<T> tree : right) {
-                nodes.add(tree);
+            List<ScapegoatTree<T>> right = ((ScapegoatTree<T>)this.getRightChild()).inOrderTraversal();
+            for (int i = 0; i < right.getSize(); i++) {
+                nodes.add(right.get(i));
             }
         }
         return nodes;
@@ -106,15 +106,15 @@ public class ScapegoatTree<T> extends BinaryTree {
      * @param parent parent of the current node
      * @return new root of the tree
      */
-    private static<T> ScapegoatTree<T> rebuild (ArrayList<ScapegoatTree<T>> children, ScapegoatTree<T> parent) {
-        if (children.isEmpty()) {
+    private static<T> ScapegoatTree<T> rebuild (List<ScapegoatTree<T>> children, ScapegoatTree<T> parent) {
+        if (children.getSize() == 0) {
             return null;
         }
         
-        int mid = children.size() / 2;
-        ArrayList<ScapegoatTree<T>> smaller, larger;
-        smaller = new ArrayList<>();
-        larger = new ArrayList<>();
+        int mid = children.getSize() / 2;
+        List<ScapegoatTree<T>> smaller, larger;
+        smaller = new List<>();
+        larger = new List<>();
         
         ScapegoatTree<T> tree = new ScapegoatTree<>();
         ScapegoatTree<T> old = children.get(mid);
@@ -122,12 +122,12 @@ public class ScapegoatTree<T> extends BinaryTree {
         tree.setRightChild(old.getRightChild());
         tree.setValue(old.getValue());
         tree.setParent(parent);
-        tree.setSize(children.size());
+        tree.setSize(children.getSize());
         
         for (int i = 0; i < mid; i++) {
             smaller.add(children.get(i));
         }
-        for (int i = mid + 1; i < children.size(); i++) {
+        for (int i = mid + 1; i < children.getSize(); i++) {
             larger.add(children.get(i));
         }
         
@@ -157,7 +157,7 @@ public class ScapegoatTree<T> extends BinaryTree {
         if (this.parent == null) { // i.e. this node is root
             if (this.size < ALPHA * this.maxSize) {
                 this.maxSize = this.size;
-                ArrayList<ScapegoatTree<T>> children = this.inOrderTraversal();
+                List<ScapegoatTree<T>> children = this.inOrderTraversal();
                 ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent);
                 
                 ScapegoatTree<T> leftChild = (ScapegoatTree<T>)newThis.getLeftChild();
