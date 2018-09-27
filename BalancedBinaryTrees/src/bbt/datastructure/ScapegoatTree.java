@@ -3,7 +3,7 @@ package bbt.datastructure;
 import java.util.ArrayList;
 
 public class ScapegoatTree<T> extends BinaryTree {
-    private final double ALPHA = 0.75;
+    private final double ALPHA = 2.0 / 3.0;
     private int size = 0;
     private int maxSize = 0;
     private ScapegoatTree<T> parent;
@@ -210,5 +210,16 @@ public class ScapegoatTree<T> extends BinaryTree {
     public void clear () {
         this.size = 0;
         super.clear();
+    }
+    
+    public int getHeight () {
+        int h = 0;
+        if (this.getLeftChild() != null) {
+            h = 1 + ((ScapegoatTree)this.getLeftChild()).getHeight();
+        }
+        if (this.getRightChild() != null) {
+            h = Math.max(h, 1 + ((ScapegoatTree)this.getRightChild()).getHeight());
+        }
+        return h;
     }
 }
