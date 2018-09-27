@@ -2,7 +2,7 @@ package bbt.testing;
 
 import bbt.util.Pair;
 import bbt.datastructure.BinaryTree;
-import java.util.ArrayList;
+import bbt.util.List;
 import java.util.HashMap;
 
 /*
@@ -15,11 +15,12 @@ import java.util.HashMap;
 public abstract class Test {
     
     public boolean run (BinaryTree<Integer> tree) {
-        ArrayList<Pair<String, Integer>> input = getInput();
+        List<Pair<String, Integer>> input = getInput();
         HashMap<Integer, Integer> map = new HashMap<>();
         boolean success = true;
         
-        for (Pair<String, Integer> pair : input) {
+        for (int i = 0; i < input.getSize(); i++) {
+            Pair<String, Integer> pair = input.get(i);
             switch (pair.getFirst()) {
                 case "INSERT":
                     tree.insert(pair.getSecond());
@@ -51,5 +52,5 @@ public abstract class Test {
         return success;
     }
     
-    protected abstract ArrayList<Pair<String, Integer>> getInput ();
+    protected abstract List<Pair<String, Integer>> getInput ();
 }

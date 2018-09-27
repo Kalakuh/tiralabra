@@ -1,7 +1,7 @@
 package bbt.testing;
 
+import bbt.util.List;
 import bbt.util.Pair;
-import java.util.ArrayList;
 
 public class InsertCheckEraseNTest extends Test {
     private int n;
@@ -15,8 +15,8 @@ public class InsertCheckEraseNTest extends Test {
     }
     
     @Override
-    protected ArrayList<Pair<String, Integer>> getInput() {
-        ArrayList<Pair<String, Integer>> input = new ArrayList<>();
+    protected List<Pair<String, Integer>> getInput() {
+        List<Pair<String, Integer>> input = new List<>();
         for (int i = 1; i <= n; i++) {
             input.add(new Pair("INSERT", i));
         }
