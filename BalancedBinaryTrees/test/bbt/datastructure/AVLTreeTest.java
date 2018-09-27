@@ -149,4 +149,15 @@ public class AVLTreeTest {
         instance.clear();
         assertTrue(!instance.contains(2));
     }
+    
+    /**
+     * Test inserting the same element and then erasing
+     */
+    @Test
+    public void testInsertAndEraseSame () {
+        instance.insert(1);
+        instance.insert(1);
+        instance.erase(1);
+        assertTrue(instance.contains(1));
+    }
 }
