@@ -9,7 +9,7 @@ public class Pair<T, S> {
      * @param first first value
      * @param second second value
      */
-    public Pair (T first, S second) {
+    public Pair(T first, S second) {
         this.first = first;
         this.second = second;
     }
@@ -18,7 +18,7 @@ public class Pair<T, S> {
      * Returns the first value of the pair
      * @return first value
      */
-    public T getFirst () {
+    public T getFirst() {
         return this.first;
     }
     
@@ -26,7 +26,7 @@ public class Pair<T, S> {
      * Returns the second value of the pair
      * @return second value
      */
-    public S getSecond () {
+    public S getSecond() {
         return this.second;
     }
     
@@ -34,7 +34,7 @@ public class Pair<T, S> {
      * Sets the first value
      * @param value new first value
      */
-    public void setFirst (T value) {
+    public void setFirst(T value) {
         this.first = value;
     }
     
@@ -42,7 +42,7 @@ public class Pair<T, S> {
      * Sets the second value
      * @param value new second value
      */
-    public void setSecond (S value) {
+    public void setSecond(S value) {
         this.second = value;
     }
 }

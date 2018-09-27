@@ -7,11 +7,19 @@ import bbt.datastructure.BinaryTree;
 public class Tester {
     private BinaryTree<Integer> tree;
     
-    public Tester (BinaryTree tree) {
+    /**
+     * Constructor for a Tester class
+     * @param tree An instance of a tree for which the tests are run
+     */
+    public Tester(BinaryTree tree) {
         this.tree = tree;
     }
     
-    public void runTest (Test test) {
+    /**
+     * Runs the given test and gives a report about it
+     * @param test Instance of a Test
+     */
+    public void runTest(Test test) {
         tree.clear();
         long startTime = System.currentTimeMillis();
         boolean success = test.run(tree);

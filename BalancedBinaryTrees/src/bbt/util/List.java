@@ -10,7 +10,7 @@ public class List<T> {
     /**
      * Constructor for a dynamic sized array
      */
-    public List () {
+    public List() {
         this.size = 0;
         this.arrayLength = 1;
         this.array = new Array<T>(arrayLength);
@@ -20,7 +20,7 @@ public class List<T> {
      * Add element x to array
      * @param x element to be inserted
      */
-    public void add (T x) {
+    public void add(T x) {
         if (size == arrayLength) {
             Array<T> next = new Array<>(2 * arrayLength);
             for (int i = 0; i < arrayLength; i++) {
@@ -38,7 +38,7 @@ public class List<T> {
      * @param i index of element
      * @return i-th element
      */
-    public T get (int i) {
+    public T get(int i) {
         if (i < 0 || i >= size) {
             throw new InvalidParameterException();
         }
@@ -49,7 +49,7 @@ public class List<T> {
      * Get size of the list
      * @return the size of the list
      */
-    public int getSize () {
+    public int getSize() {
         return this.size;
     }
 }

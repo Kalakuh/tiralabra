@@ -7,7 +7,7 @@ public class Array<T> {
      * Constructor for a fixed size array
      * @param n size of array
      */
-    public Array (int n) {
+    public Array(int n) {
         array = new Object[n];
     }
     
@@ -16,7 +16,7 @@ public class Array<T> {
      * @param i index
      * @param x element
      */
-    public void set (int i, T x) {
+    public void set(int i, T x) {
         array[i] = x;
     }
     
@@ -25,7 +25,7 @@ public class Array<T> {
      * @param i index of element
      * @return element at i-th position
      */
-    public T get (int i) {
-        return (T)array[i];
+    public T get(int i) {
+        return (T) array[i];
     }
 }

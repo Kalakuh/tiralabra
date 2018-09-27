@@ -6,18 +6,18 @@ public class AVLTree<T> extends BinaryTree {
     /**
      * Parameterless constructor for the AVLTree
      */
-    public AVLTree () {
+    public AVLTree() {
         super();
         this.height = 0;
     }
     
     @Override
-    protected BinaryTree create () {
+    protected BinaryTree create() {
         return new AVLTree<>();
     }
     
     @Override
-    protected void insertCallback () {
+    protected void insertCallback() {
         this.checkAVLCondition();
     }
     
@@ -31,83 +31,84 @@ public class AVLTree<T> extends BinaryTree {
      * AVL condition says that the absolute difference between the height of
      * the left and right subtree should not be more than one.
      */
-    private void checkAVLCondition () {
+    private void checkAVLCondition() {
         this.updateHeight();
         int leftSubtreeHeight = 0;
         int rightSubtreeHeight = 0;
         if (this.getLeftChild() != null) {
-            leftSubtreeHeight = ((AVLTree<T>)this.getLeftChild()).getHeight();
+            leftSubtreeHeight = ((AVLTree<T>) this.getLeftChild()).getHeight();
         }
         if (this.getRightChild() != null) {
-            rightSubtreeHeight = ((AVLTree<T>)this.getRightChild()).getHeight();
+            rightSubtreeHeight = ((AVLTree<T>) this.getRightChild()).getHeight();
         }
         // tree rotations
         if (Math.abs(leftSubtreeHeight - rightSubtreeHeight) > 1) {
             // AVL condition is violated
-            if (leftSubtreeHeight > rightSubtreeHeight) {
-                AVLTree<T> leftChild = (AVLTree<T>)this.getLeftChild();
-                if (leftChild.getRightChild() != null) {
-                    int leftRightSubtreeHeight = ((AVLTree<T>)leftChild.getRightChild()).getHeight();
-                    int leftLeftSubtreeHeight = 0;
-                    if (leftChild.getLeftChild() != null) {
-                        leftLeftSubtreeHeight = ((AVLTree<T>)leftChild.getLeftChild()).getHeight();
-                    }
-                    if (leftRightSubtreeHeight > leftLeftSubtreeHeight) {
-                        leftChild.rotateCounterclockwise();
-                        leftChild.updateHeight();
-                    }
-                }
-                this.rotateClockwise();
-            } else {
-                AVLTree<T> rightChild = (AVLTree<T>)this.getRightChild();
-                if (rightChild.getLeftChild() != null) {
-                    int rightLeftSubtreeHeight = ((AVLTree<T>)rightChild.getLeftChild()).getHeight();
-                    int rightRightSubtreeHeight = 0;
-                    if (rightChild.getRightChild() != null) {
-                        rightRightSubtreeHeight = ((AVLTree<T>)rightChild.getRightChild()).getHeight();
-                    }
-                    if (rightLeftSubtreeHeight > rightRightSubtreeHeight) {
-                        rightChild.rotateClockwise();
-                        rightChild.updateHeight();
-                    }
-                }
-                this.rotateCounterclockwise();
-            }
-            
-            this.updateHeight();
+            this.fixAVLCondition(leftSubtreeHeight, rightSubtreeHeight);
         }
+    }
+    
+    /**
+     * Fixes a broken AVL condition with rotations
+     * @param leftSubtreeHeight height of left subtree
+     * @param rightSubtreeHeight height of right subtree
+     */
+    private void fixAVLCondition(int leftSubtreeHeight, int rightSubtreeHeight) {
+        if (leftSubtreeHeight > rightSubtreeHeight) {
+            AVLTree<T> leftChild = (AVLTree<T>) this.getLeftChild();
+            if (leftChild.getRightChild() != null) {
+                int leftRightSubtreeHeight = ((AVLTree<T>) leftChild.getRightChild()).getHeight();
+                int leftLeftSubtreeHeight = 0;
+                if (leftChild.getLeftChild() != null) {
+                    leftLeftSubtreeHeight = ((AVLTree<T>) leftChild.getLeftChild()).getHeight();
+                }
+                if (leftRightSubtreeHeight > leftLeftSubtreeHeight) {
+                    leftChild.rotateCounterclockwise();
+                    leftChild.updateHeight();
+                }
+            }
+            this.rotateClockwise();
+        } else {
+            AVLTree<T> rightChild = (AVLTree<T>) this.getRightChild();
+            if (rightChild.getLeftChild() != null) {
+                int rightLeftSubtreeHeight = ((AVLTree<T>) rightChild.getLeftChild()).getHeight();
+                int rightRightSubtreeHeight = 0;
+                if (rightChild.getRightChild() != null) {
+                    rightRightSubtreeHeight = ((AVLTree<T>) rightChild.getRightChild()).getHeight();
+                }
+                if (rightLeftSubtreeHeight > rightRightSubtreeHeight) {
+                    rightChild.rotateClockwise();
+                    rightChild.updateHeight();
+                }
+            }
+            this.rotateCounterclockwise();
+        }
+
+        this.updateHeight();
     }
     
     /**
      * Returns the height of the binary tree
      * @return The height of the binary tree
      */
-    private int getHeight () {
+    private int getHeight() {
         return this.height;
     }
     
     /**
      * Updates the height variable of the binary tree
      */
-    private void updateHeight () {
+    private void updateHeight() {
         if (this.getValue() == null) {
             this.height = 0;
             return;
         }
         this.height = 1;
         if (this.getLeftChild() != null) {
-            if (this.getLeftChild().getValue() == null) {
-                this.setLeftChild(null);
-            } else {
-                this.height = Math.max(this.height, ((AVLTree<T>)this.getLeftChild()).getHeight() + 1);
-            }
+            this.height = Math.max(this.height, ((AVLTree<T>) this.getLeftChild()).getHeight() + 1);
         }
         if (this.getRightChild() != null) {
-            if (this.getRightChild().getValue() == null) {
-                this.setRightChild(null);
-            } else {
-                this.height = Math.max(this.height, ((AVLTree<T>)this.getRightChild()).getHeight() + 1);
-            }
+            this.height = Math.max(this.height, ((AVLTree<T>) this.getRightChild()).getHeight() + 1);
         }
     }
     
@@ -115,27 +116,27 @@ public class AVLTree<T> extends BinaryTree {
      * Rotates the tree clockwise as a part of maintaining the AVL condition
      */
     @Override
-    protected void rotateClockwise () {
+    protected void rotateClockwise() {
         super.rotateClockwise();
         this.updateHeight();
-        ((AVLTree<T>)this.getRightChild()).updateHeight();
+        ((AVLTree<T>) this.getRightChild()).updateHeight();
     }
     
     /**
      * Rotates the tree counterclockwise as a part of maintaining the AVL condition
      */
     @Override
-    protected void rotateCounterclockwise () {
+    protected void rotateCounterclockwise() {
         super.rotateCounterclockwise();
         this.updateHeight();
-        ((AVLTree<T>)this.getLeftChild()).updateHeight();
+        ((AVLTree<T>) this.getLeftChild()).updateHeight();
     }
     
     /**
      * Clears the tree
      */
     @Override
-    public void clear () {
+    public void clear() {
         this.height = 0;
         super.clear();
     }
