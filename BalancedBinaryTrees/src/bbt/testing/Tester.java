@@ -8,7 +8,7 @@ public class Tester {
     private BinaryTree<Integer> tree;
     
     /**
-     * Constructor for a Tester class
+     * Constructor for a Tester class.
      * @param tree An instance of a tree for which the tests are run
      */
     public Tester(BinaryTree tree) {
@@ -16,7 +16,7 @@ public class Tester {
     }
     
     /**
-     * Runs the given test and gives a report about it
+     * Runs the given test and gives a report about it.
      * @param test Instance of a Test
      */
     public void runTest(Test test) {

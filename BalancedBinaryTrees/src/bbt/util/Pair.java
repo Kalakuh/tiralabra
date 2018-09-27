@@ -5,7 +5,7 @@ public class Pair<T, S> {
     private S second;
     
     /**
-     * Constructor for a new pair
+     * Constructor for a new pair.
      * @param first first value
      * @param second second value
      */
@@ -15,7 +15,7 @@ public class Pair<T, S> {
     }
     
     /**
-     * Returns the first value of the pair
+     * Returns the first value of the pair.
      * @return first value
      */
     public T getFirst() {
@@ -23,7 +23,7 @@ public class Pair<T, S> {
     }
     
     /**
-     * Returns the second value of the pair
+     * Returns the second value of the pair.
      * @return second value
      */
     public S getSecond() {
@@ -31,7 +31,7 @@ public class Pair<T, S> {
     }
     
     /**
-     * Sets the first value
+     * Sets the first value.
      * @param value new first value
      */
     public void setFirst(T value) {
@@ -39,7 +39,7 @@ public class Pair<T, S> {
     }
     
     /**
-     * Sets the second value
+     * Sets the second value.
      * @param value new second value
      */
     public void setSecond(S value) {

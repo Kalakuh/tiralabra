@@ -8,6 +8,9 @@ public class ScapegoatTree<T> extends BinaryTree {
     private int maxSize = 0;
     private ScapegoatTree<T> parent;
     
+    /**
+     * Constructor for a new scapegoat tree.
+     */
     public ScapegoatTree() {
         super();
         parent = null;
@@ -24,7 +27,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Helper function for insertion in scapegoat tree
+     * Helper function for insertion in scapegoat tree.
      * @param element element to be inserted
      * @param depth depth of recursion
      * @param treeSize size of the tree after insertion
@@ -78,7 +81,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Returns list of ScapegoatTrees in the order of in-order traversal - first left subtree, then current node and then right subtree
+     * Returns list of ScapegoatTrees in the order of in-order traversal - first left subtree, then current node and then right subtree.
      * @return list of ScapegoatTrees in in-order order
      */
     private List<ScapegoatTree<T>> inOrderTraversal() {
@@ -97,7 +100,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Rebuilds as balanced binary tree as possible
+     * Rebuilds as balanced binary tree as possible.
      * @param <T> type of values in the tree
      * @param children list of children
      * @param parent parent of the current node
@@ -156,7 +159,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * During deletion the condition was violated, so this function rebuilds the tree
+     * During deletion the condition was violated, so this function rebuilds the tree.
      */
     private void rebuildRoot() {
         this.maxSize = this.size;
@@ -176,7 +179,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Returns the size of the subtree
+     * Returns the size of the subtree.
      * @return the size of the subtree
      */
     private int getSize() {
@@ -184,7 +187,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Sets the size of the subtree
+     * Sets the size of the subtree.
      * @param the size of the subtree
      */
     private void setSize(int sz) {
@@ -192,7 +195,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Returns the parent of the node
+     * Returns the parent of the node.
      * @return the parent of the node
      */
     private ScapegoatTree<T> getParent() {
@@ -200,7 +203,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Set parent node for tree
+     * Set parent node for tree.
      * @param tree parent of tree
      */
     private void setParent(ScapegoatTree<T> tree) {
@@ -208,7 +211,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Clears the tree
+     * Clears the tree.
      */
     @Override
     public void clear() {

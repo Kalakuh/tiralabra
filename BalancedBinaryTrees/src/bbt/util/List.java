@@ -8,7 +8,7 @@ public class List<T> {
     private Array<T> array;
     
     /**
-     * Constructor for a dynamic sized array
+     * Constructor for a dynamic sized array.
      */
     public List() {
         this.size = 0;
@@ -17,16 +17,16 @@ public class List<T> {
     }
     
     /**
-     * Add element x to array
+     * Add element x to array.
      * @param x element to be inserted
      */
     public void add(T x) {
         if (size == arrayLength) {
-            Array<T> next = new Array<>(2 * arrayLength);
+            Array<T> next = new Array<>((int) (2.5 * arrayLength));
             for (int i = 0; i < arrayLength; i++) {
                 next.set(i, array.get(i));
             }
-            arrayLength *= 2;
+            arrayLength *= 2.5;
             array = next;
         }
         array.set(size, x);
@@ -34,7 +34,7 @@ public class List<T> {
     }
     
     /**
-     * Get i-th element
+     * Get i-th element.
      * @param i index of element
      * @return i-th element
      */
@@ -46,7 +46,7 @@ public class List<T> {
     }
     
     /**
-     * Get size of the list
+     * Get size of the list.
      * @return the size of the list
      */
     public int getSize() {

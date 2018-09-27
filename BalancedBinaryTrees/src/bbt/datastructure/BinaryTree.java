@@ -14,7 +14,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Function that should return a new instance of the used Tree type
+     * Function that should return a new instance of the used Tree type.
      * @return New instance of the used tree type
      */
     protected abstract BinaryTree<T> create();
@@ -46,12 +46,12 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     
     
     /**
-     * Function that's called just before insert returns
+     * Function that's called just before insert returns.
      */
     protected abstract void insertCallback();
     
     /**
-     * Checks whether the given parameter can be found in the tree
+     * Checks whether the given parameter can be found in the tree.
      * @param element The value that's searched for
      * @return Returns true if the element is found
      */
@@ -104,12 +104,12 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Function that's called just before returning from erase or eraseAnalysis
+     * Function that's called just before returning from erase or eraseAnalysis.
      */
     protected abstract void eraseCallback();
     
     /**
-     * Does the case analysis for deletion
+     * Does the case analysis for deletion.
      * @return Returns the value that should be erased and moved upwards
      */
     private T eraseAnalysis() {
@@ -133,7 +133,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Remove children whose value is null
+     * Remove children whose value is null.
      */
     private void eraseNullChildren() {
         if (this.getLeftChild() != null) {
@@ -149,7 +149,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Finds the leftmost (and thus smallest) node of the subtree and then calls eraseAnalysis to delete it
+     * Finds the leftmost (and thus smallest) node of the subtree and then calls eraseAnalysis to delete it.
      * @return Returns the value that should be moved upwards in the binary tree
      */
     private T eraseLeftmost() {
@@ -179,7 +179,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Copies the value, left and right child from given parameter
+     * Copies the value, left and right child from given parameter.
      * @param tree Tree to be copied
      */
     protected void copyFrom(BinaryTree<T> tree) {
@@ -189,7 +189,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Returns the left child of the root
+     * Returns the left child of the root.
      * @return The left child of the root
      */
     protected BinaryTree<T> getLeftChild() {
@@ -197,7 +197,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Sets the left child of the root
+     * Sets the left child of the root.
      * @param tree The new left child for the root
      */
     protected void setLeftChild(BinaryTree<T> tree) {
@@ -205,7 +205,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Returns the right child of the root
+     * Returns the right child of the root.
      * @return The right child of the root
      */
     protected BinaryTree<T> getRightChild() {
@@ -213,7 +213,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Sets the right child of the root
+     * Sets the right child of the root.
      * @param tree The new right child for the root
      */
     protected void setRightChild(BinaryTree<T> tree) {
@@ -221,7 +221,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Rotates the tree clockwise
+     * Rotates the tree clockwise.
      */
     protected void rotateClockwise() {
         BinaryTree<T> left = this.getLeftChild();
@@ -236,7 +236,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Rotates the tree counterclockwise
+     * Rotates the tree counterclockwise.
      */
     protected void rotateCounterclockwise() {
         BinaryTree<T> right = this.getRightChild();
@@ -251,7 +251,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
     }
     
     /**
-     * Removes everything from the tree
+     * Removes everything from the tree.
      */
     public void clear() {
         this.value = null;

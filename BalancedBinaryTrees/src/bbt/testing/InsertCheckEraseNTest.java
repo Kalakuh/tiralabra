@@ -7,7 +7,7 @@ public class InsertCheckEraseNTest extends Test {
     private int n;
     
     /**
-     * Inserts numbers 1..n to the tree, then checks that it contains them, and then erases them
+     * Inserts numbers 1..n to the tree, then checks that it contains them, and then erases them.
      * @param n Number of elements
      */
     public InsertCheckEraseNTest(int n) {

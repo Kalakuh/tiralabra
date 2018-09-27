@@ -4,7 +4,7 @@ public class Array<T> {
     Object[] array;
     
     /**
-     * Constructor for a fixed size array
+     * Constructor for a fixed size array.
      * @param n size of array
      */
     public Array(int n) {
@@ -12,7 +12,7 @@ public class Array<T> {
     }
     
     /**
-     * Set i-th element of array
+     * Set i-th element of array.
      * @param i index
      * @param x element
      */
@@ -21,7 +21,7 @@ public class Array<T> {
     }
     
     /**
-     * Return i-th element of array
+     * Return i-th element of array.
      * @param i index of element
      * @return element at i-th position
      */

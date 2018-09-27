@@ -5,6 +5,7 @@ import bbt.testing.*;
 
 public class Main {
     /**
+     * The main function... Currently runs simple tests.
      * @param args the command line arguments
      */
     public static void main(String[] args) {

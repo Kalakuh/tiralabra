@@ -7,13 +7,16 @@ import static org.junit.Assert.*;
 public class ScapegoatTreeTest {
     private ScapegoatTree<Integer> instance;
     
+    /**
+     * Ran before each test.
+     */
     @Before
     public void setUp() {
         instance = new ScapegoatTree<>();
     }
     
     /**
-     * Test that inserting null is not allowed
+     * Test that inserting null is not allowed.
      */
     @Test
     public void testInsertingNullIsNotAllowed() {
@@ -26,7 +29,7 @@ public class ScapegoatTreeTest {
     }
     
     /**
-     * Test that inserted element can be found
+     * Test that inserted element can be found.
      */
     @Test
     public void testInsertedElementIsFound() {
@@ -37,7 +40,7 @@ public class ScapegoatTreeTest {
     }
 
     /**
-     * Test that erasing an inserted element from the tree works
+     * Test that erasing an inserted element from the tree works.
      */
     @Test
     public void testInsertAndErase() {
@@ -48,7 +51,7 @@ public class ScapegoatTreeTest {
     }
     
     /**
-     * Tests clearing the tree - if this works for AVL then we can assume it works for everything, since it's implemented in BinaryTree
+     * Tests clearing the tree - if this works for AVL then we can assume it works for everything, since it's implemented in BinaryTree.
      */
     @Test
     public void testClear() {

@@ -11,13 +11,16 @@ import static org.junit.Assert.*;
 public class AVLTreeTest {
     private AVLTree<Integer> instance;
     
+    /**
+     * Ran before each test.
+     */
     @Before
     public void setUp() {
         instance = new AVLTree<>();
     }
     
     /**
-     * Checks that the heap condition actually holds for the tree
+     * Checks that the heap condition actually holds for the tree.
      * @param tree AVL Tree to be checked
      * @return Returns true if the condition holds
      */
@@ -35,7 +38,7 @@ public class AVLTreeTest {
     }
     
     /**
-     * Checks that the heap condition actually holds for the tree
+     * Checks that the heap condition actually holds for the tree.
      * @param tree AVL Tree to be checked
      * @return Returns true if the condition holds
      */
@@ -59,7 +62,7 @@ public class AVLTreeTest {
     }
     
     /**
-     * Test that inserting null is not allowed
+     * Test that inserting null is not allowed.
      */
     @Test
     public void testInsertingNullIsNotAllowed() {
@@ -72,7 +75,7 @@ public class AVLTreeTest {
     }
     
     /**
-     * Test that inserted element can be found
+     * Test that inserted element can be found.
      */
     @Test
     public void testInsertedElementIsFound() {
@@ -83,7 +86,7 @@ public class AVLTreeTest {
     }
 
     /**
-     * Test that erasing an inserted element from the tree works
+     * Test that erasing an inserted element from the tree works.
      */
     @Test
     public void testInsertAndErase() {
@@ -96,7 +99,7 @@ public class AVLTreeTest {
     }
     
     /**
-     * Test AVL condition
+     * Test AVL condition.
      */
     @Test
     public void testAVLCondition() {
@@ -107,7 +110,7 @@ public class AVLTreeTest {
     }
     
     /**
-     * Test heights are correct
+     * Test heights are correct.
      */
     @Test
     public void testHeightCorrectness() {
@@ -120,7 +123,7 @@ public class AVLTreeTest {
     }
     
     /**
-     * Tests clearing the tree - if this works for AVL then we can assume it works for everything, since it's implemented in BinaryTree
+     * Tests clearing the tree - if this works for AVL then we can assume it works for everything, since it's implemented in BinaryTree.
      */
     @Test
     public void testClear() {
@@ -131,7 +134,7 @@ public class AVLTreeTest {
     }
     
     /**
-     * Test inserting the same element and then erasing
+     * Test inserting the same element and then erasing.
      */
     @Test
     public void testInsertAndEraseSame() {

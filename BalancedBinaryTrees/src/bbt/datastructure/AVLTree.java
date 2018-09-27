@@ -4,7 +4,7 @@ public class AVLTree<T> extends BinaryTree {
     private int height;
     
     /**
-     * Parameterless constructor for the AVLTree
+     * Parameterless constructor for the AVLTree.
      */
     public AVLTree() {
         super();
@@ -49,7 +49,7 @@ public class AVLTree<T> extends BinaryTree {
     }
     
     /**
-     * Fixes a broken AVL condition with rotations
+     * Fixes a broken AVL condition with rotations.
      * @param leftSubtreeHeight height of left subtree
      * @param rightSubtreeHeight height of right subtree
      */
@@ -88,7 +88,7 @@ public class AVLTree<T> extends BinaryTree {
     }
     
     /**
-     * Returns the height of the binary tree
+     * Returns the height of the binary tree.
      * @return The height of the binary tree
      */
     private int getHeight() {
@@ -96,7 +96,7 @@ public class AVLTree<T> extends BinaryTree {
     }
     
     /**
-     * Updates the height variable of the binary tree
+     * Updates the height variable of the binary tree.
      */
     private void updateHeight() {
         if (this.getValue() == null) {
@@ -113,7 +113,7 @@ public class AVLTree<T> extends BinaryTree {
     }
     
     /**
-     * Rotates the tree clockwise as a part of maintaining the AVL condition
+     * Rotates the tree clockwise as a part of maintaining the AVL condition.
      */
     @Override
     protected void rotateClockwise() {
@@ -123,7 +123,7 @@ public class AVLTree<T> extends BinaryTree {
     }
     
     /**
-     * Rotates the tree counterclockwise as a part of maintaining the AVL condition
+     * Rotates the tree counterclockwise as a part of maintaining the AVL condition.
      */
     @Override
     protected void rotateCounterclockwise() {
@@ -133,7 +133,7 @@ public class AVLTree<T> extends BinaryTree {
     }
     
     /**
-     * Clears the tree
+     * Clears the tree.
      */
     @Override
     public void clear() {

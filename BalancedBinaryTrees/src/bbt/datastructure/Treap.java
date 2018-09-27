@@ -6,7 +6,7 @@ public class Treap<T> extends BinaryTree {
     private int priority;
     
     /**
-     * Default constructor for treap
+     * Default constructor for treap.
      */
     public Treap() {
         Random random = new Random();
@@ -29,7 +29,7 @@ public class Treap<T> extends BinaryTree {
     }
     
     /**
-     * Returns the priority of the treap node
+     * Returns the priority of the treap node.
      * @return The priority of the treap
      */
     private int getPriority() {
@@ -37,7 +37,7 @@ public class Treap<T> extends BinaryTree {
     }
     
     /**
-     * Sets the priority of the treap
+     * Sets the priority of the treap.
      * @param priority New priority
      */
     private void setPriority(int priority) {
@@ -45,7 +45,7 @@ public class Treap<T> extends BinaryTree {
     }
 
     /**
-     * Check heap condition - that is, whether highest priorities are topmost - and possibly fix it
+     * Check heap condition - that is, whether highest priorities are topmost - and possibly fix it.
      */
     private void checkHeapCondition() {
         // After insertion or deletion at most one of the children can have a priority higher than the priority of this node
@@ -64,7 +64,7 @@ public class Treap<T> extends BinaryTree {
     }
     
     /**
-     * Rotates the tree clockwise and updates priorities
+     * Rotates the tree clockwise and updates priorities.
      */
     @Override
     protected void rotateClockwise() {
@@ -75,7 +75,7 @@ public class Treap<T> extends BinaryTree {
     }
     
     /**
-     * Rotates the tree counterclockwise and updates priorities
+     * Rotates the tree counterclockwise and updates priorities.
      */
     @Override
     protected void rotateCounterclockwise() {

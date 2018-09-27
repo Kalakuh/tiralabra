@@ -10,13 +10,16 @@ import java.util.logging.Logger;
 public class TreapTest {
     private Treap<Integer> instance;
     
+    /**
+     * Ran before each test.
+     */
     @Before
     public void setUp() {
         instance = new Treap<>();
     }
     
     /**
-     * Checks that the heap condition actually holds for the treap
+     * Checks that the heap condition actually holds for the treap.
      * @param treap Treap to be checked
      * @return Returns true if the condition holds
      */
@@ -41,7 +44,7 @@ public class TreapTest {
     }
     
     /**
-     * Test that inserting null is not allowed
+     * Test that inserting null is not allowed.
      */
     @Test
     public void testInsertingNullIsNotAllowed() {
@@ -54,7 +57,7 @@ public class TreapTest {
     }
     
     /**
-     * Test that inserted element can be found
+     * Test that inserted element can be found.
      */
     @Test
     public void testInsertedElementIsFound() {
@@ -65,7 +68,7 @@ public class TreapTest {
     }
 
     /**
-     * Test that erasing an inserted element from the tree works
+     * Test that erasing an inserted element from the tree works.
      */
     @Test
     public void testInsertAndErase() {
@@ -78,7 +81,7 @@ public class TreapTest {
     }
     
     /**
-     * Test heap condition
+     * Test heap condition.
      */
     @Test
     public void testHeapCondition() {

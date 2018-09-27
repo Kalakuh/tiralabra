@@ -17,6 +17,11 @@ public abstract class Test {
     public static final String CONTAINS = "contains";
     public static final String ERASE = "erase";
     
+    /**
+     * Run the test on the given tree.
+     * @param tree Tree for which the test is ran.
+     * @return Boolean that is true if no mistakes happened on contains function.
+     */
     public boolean run(BinaryTree<Integer> tree) {
         List<Pair<String, Integer>> input = getInput();
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -25,11 +30,11 @@ public abstract class Test {
         for (int i = 0; i < input.getSize(); i++) {
             Pair<String, Integer> pair = input.get(i);
             if (pair.getFirst().equals(INSERT)) {
-                this.insert(tree, pair, map);
+                this.insert(tree, pair.getSecond(), map);
             } else if (pair.getFirst().equals(CONTAINS)) {
-                success = this.contains(tree, pair, map) || success;
+                success = this.contains(tree, pair.getSecond(), map) || success;
             } else if (pair.getFirst().equals(ERASE)) {
-                this.erase(tree, pair, map);
+                this.erase(tree, pair.getSecond(), map);
             } else {
                 System.out.println("Unknown command in the test: " + pair.getFirst());
                 throw new Error();
@@ -38,31 +43,54 @@ public abstract class Test {
         return success;
     }
     
-    private void insert(BinaryTree<Integer> tree, Pair<String, Integer> pair, HashMap<Integer, Integer> map) {
-        tree.insert(pair.getSecond());
-        if (!map.containsKey(pair.getSecond())) {
-            map.put(pair.getSecond(), 0);
+    /**
+     * Insert a integer to tree
+     * @param tree Tree for insertion
+     * @param key Key to be inserted
+     * @param map Map for checker
+     */
+    private void insert(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
+        tree.insert(key);
+        if (!map.containsKey(key)) {
+            map.put(key, 0);
         }
-        map.put(pair.getSecond(), map.get(pair.getSecond()) + 1);
+        map.put(key, map.get(key) + 1);
     }
     
-    private boolean contains(BinaryTree<Integer> tree, Pair<String, Integer> pair, HashMap<Integer, Integer> map) {
-        if (!map.containsKey(pair.getSecond())) {
-            map.put(pair.getSecond(), 0);
+    /**
+     * Checks that the key is in the tree iff it's in the map.
+     * @param tree Tree for checking
+     * @param key Key to be checked
+     * @param map Map for checker
+     * @return true if consistent with checker
+     */
+    private boolean contains(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
+        if (!map.containsKey(key)) {
+            map.put(key, 0);
         }
-        if ((map.get(pair.getSecond()) != 0) != tree.contains(pair.getSecond())) {
+        if ((map.get(key) != 0) != tree.contains(key)) {
             return false;
         }
         return true;
     }
     
-    private void erase(BinaryTree<Integer> tree, Pair<String, Integer> pair, HashMap<Integer, Integer> map) {
-        tree.insert(pair.getSecond());
-        if (!map.containsKey(pair.getSecond())) {
-            map.put(pair.getSecond(), 0);
+    /**
+     * Erase a integer from tree.
+     * @param tree Tree for deletion
+     * @param key Key to be deleted
+     * @param map Map for checker
+     */
+    private void erase(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
+        tree.insert(key);
+        if (!map.containsKey(key)) {
+            map.put(key, 0);
         }
-        map.put(pair.getSecond(), map.get(pair.getSecond()) + 1);
+        map.put(key, map.get(key) + 1);
     }
     
+    /**
+     * Function that returns the test data as List<String, Integer>.
+     * @return Test data
+     */
     protected abstract List<Pair<String, Integer>> getInput();
 }
