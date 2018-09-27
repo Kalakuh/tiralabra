@@ -3,7 +3,7 @@ package bbt.datastructure;
 import java.util.ArrayList;
 
 public class ScapegoatTree<T> extends BinaryTree {
-    private final double ALPHA = 2.0 / 3.0;
+    private final double ALPHA = 0.75;
     private int size = 0;
     private int maxSize = 0;
     private ScapegoatTree<T> parent;
@@ -168,7 +168,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     
     @Override
     protected BinaryTree create() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ScapegoatTree();
     }
     
     /**
@@ -201,5 +201,14 @@ public class ScapegoatTree<T> extends BinaryTree {
      */
     private void setParent (ScapegoatTree<T> tree) {
         this.parent = tree;
+    }
+    
+    /**
+     * Clears the tree
+     */
+    @Override
+    public void clear () {
+        this.size = 0;
+        super.clear();
     }
 }

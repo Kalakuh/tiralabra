@@ -130,4 +130,13 @@ public class AVLTree<T> extends BinaryTree {
         this.updateHeight();
         ((AVLTree<T>)this.getLeftChild()).updateHeight();
     }
+    
+    /**
+     * Clears the tree
+     */
+    @Override
+    public void clear () {
+        this.height = 0;
+        super.clear();
+    }
 }
