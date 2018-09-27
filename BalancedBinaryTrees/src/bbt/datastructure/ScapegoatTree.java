@@ -28,18 +28,18 @@ public class ScapegoatTree<T> extends BinaryTree {
      * @param element element to be inserted
      * @param depth depth of recursion
      * @param treeSize size of the tree after insertion
-     * @return does the code require a scapegoat after insertion
+     * @return value 0 means no scapegoat needs to be found. 1 means we need scapegoat and 2 means rebuilding the current one.
      */
-    private boolean insertHelper (T element, int depth, int treeSize) {
+    private int insertHelper (T element, int depth, int treeSize) {
         if (element == null) {
             throw new IllegalArgumentException();
         }
-        boolean findScapegoat;
+        int findScapegoat;
         this.size++;
         this.maxSize = Math.max(this.maxSize, this.size);
         if (this.getValue() == null) {
             this.setValue((Comparable)element);
-            findScapegoat = depth > Math.log(treeSize) / Math.log(ALPHA);
+            findScapegoat = depth > Math.log(treeSize) / Math.log(1 / ALPHA) ? 1 : 0;
         } else if (this.getValue().compareTo((Comparable)element) >= 0) {
             if (this.getLeftChild() == null) {
                 ScapegoatTree<T> child = new ScapegoatTree<>();
@@ -55,11 +55,14 @@ public class ScapegoatTree<T> extends BinaryTree {
             }
             findScapegoat = ((ScapegoatTree<T>)this.getRightChild()).insertHelper(element, depth + 1, treeSize);
         }
-        if (findScapegoat && this.parent != null && this.getSize() > ALPHA * this.parent.getSize()) {
+        if (findScapegoat == 1 && this.parent != null && this.getSize() > ALPHA * this.parent.getSize()) {
+            findScapegoat = 2;
+        } else if (findScapegoat == 2) {
+            findScapegoat = 0;
+            
             boolean left = this.getParent().getLeftChild() == this;
             ArrayList<ScapegoatTree<T>> children = this.inOrderTraversal();
             ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent);
-            
             ScapegoatTree<T> leftChild = (ScapegoatTree<T>)newThis.getLeftChild();
             this.setLeftChild(leftChild);
             this.setRightChild(newThis.getRightChild());
