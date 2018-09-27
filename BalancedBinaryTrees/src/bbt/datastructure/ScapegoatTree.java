@@ -3,7 +3,7 @@ package bbt.datastructure;
 import bbt.util.List;
 
 public class ScapegoatTree<T> extends BinaryTree {
-    private final double ALPHA = 2.0 / 3.0;
+    private final double ALPHA = 0.85;
     private int size = 0;
     private int maxSize = 0;
     private ScapegoatTree<T> parent;
