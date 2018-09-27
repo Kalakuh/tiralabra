@@ -63,11 +63,8 @@ public class ScapegoatTree<T> extends BinaryTree {
             boolean left = this.getParent().getLeftChild() == this;
             List<ScapegoatTree<T>> children = this.inOrderTraversal();
             ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent);
-            ScapegoatTree<T> leftChild = (ScapegoatTree<T>) newThis.getLeftChild();
-            this.setLeftChild(leftChild);
-            this.setRightChild(newThis.getRightChild());
             this.setParent(newThis.getParent());
-            this.setValue(newThis.getValue());
+            this.copyFrom(newThis);
             if (this.parent != null) {
                 if (left) {
                     this.getParent().setLeftChild(this);
