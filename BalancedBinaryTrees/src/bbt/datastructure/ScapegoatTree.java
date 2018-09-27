@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class ScapegoatTree<T> extends BinaryTree {
     private final double ALPHA = 2.0 / 3.0;
     private int size = 0;
+    private int maxSize = 0;
     private ScapegoatTree<T> parent;
     
     public ScapegoatTree () {
@@ -33,8 +34,9 @@ public class ScapegoatTree<T> extends BinaryTree {
         if (element == null) {
             throw new IllegalArgumentException();
         }
-        boolean findScapegoat = false;
+        boolean findScapegoat;
         this.size++;
+        this.maxSize = Math.max(this.maxSize, this.size);
         if (this.getValue() == null) {
             this.setValue((Comparable)element);
             findScapegoat = depth > Math.log(treeSize) / Math.log(ALPHA);
@@ -63,10 +65,12 @@ public class ScapegoatTree<T> extends BinaryTree {
             this.setRightChild(newThis.getRightChild());
             this.setParent(newThis.getParent());
             this.setValue(newThis.getValue());
-            if (left) {
-                this.getParent().setLeftChild(this);
-            } else {
-                this.getParent().setRightChild(this);
+            if (this.parent != null) {
+                if (left) {
+                    this.getParent().setLeftChild(this);
+                } else {
+                    this.getParent().setRightChild(this);
+                }
             }
         }
         
@@ -136,7 +140,30 @@ public class ScapegoatTree<T> extends BinaryTree {
 
     @Override
     protected void eraseCallback() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.getValue() == null) {
+            this.size = 0;
+        } else {
+            this.size = 1;
+            if (this.getLeftChild() != null) {
+                this.size += ((ScapegoatTree<T>)this.getLeftChild()).getSize();
+            }
+            if (this.getRightChild() != null) {
+                this.size += ((ScapegoatTree<T>)this.getRightChild()).getSize();
+            }
+        }
+        if (this.parent == null) { // i.e. this node is root
+            if (this.size < ALPHA * this.maxSize) {
+                this.maxSize = this.size;
+                ArrayList<ScapegoatTree<T>> children = this.inOrderTraversal();
+                ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent);
+                
+                ScapegoatTree<T> leftChild = (ScapegoatTree<T>)newThis.getLeftChild();
+                this.setLeftChild(leftChild);
+                this.setRightChild(newThis.getRightChild());
+                this.setParent(newThis.getParent());
+                this.setValue(newThis.getValue());
+            }
+        }
     }
     
     @Override
