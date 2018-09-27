@@ -96,6 +96,7 @@ public abstract class BinaryTree<T extends Comparable<T>> {
                 erased = this.getRightChild().erase(element);
             }
         }
+        this.eraseNullChildren();
         this.eraseCallback();
         return erased;
     }
@@ -124,8 +125,25 @@ public abstract class BinaryTree<T extends Comparable<T>> {
         } else {
             this.setValue(null);
         }
+        this.eraseNullChildren();
         this.eraseCallback();
         return value;
+    }
+    
+    /**
+     * Remove children whose value is null
+     */
+    private void eraseNullChildren () {
+        if (this.getLeftChild() != null) {
+            if (this.getLeftChild().getValue() == null) {
+                this.setLeftChild(null);
+            }
+        }
+        if (this.getRightChild() != null) {
+            if (this.getRightChild().getValue() == null) {
+                this.setRightChild(null);
+            }
+        }
     }
     
     /**
@@ -134,7 +152,10 @@ public abstract class BinaryTree<T extends Comparable<T>> {
      */
     private T eraseLeftmost () {
         if (this.getLeftChild() != null) {
-            return this.getLeftChild().eraseLeftmost();
+            T value = this.getLeftChild().eraseLeftmost();
+            this.eraseNullChildren();
+            this.eraseCallback();
+            return value;
         }
         return this.eraseAnalysis();
     }
