@@ -214,15 +214,4 @@ public class ScapegoatTree<T> extends BinaryTree {
         this.size = 0;
         super.clear();
     }
-    
-    public int getHeight () {
-        int h = 0;
-        if (this.getLeftChild() != null) {
-            h = 1 + ((ScapegoatTree)this.getLeftChild()).getHeight();
-        }
-        if (this.getRightChild() != null) {
-            h = Math.max(h, 1 + ((ScapegoatTree)this.getRightChild()).getHeight());
-        }
-        return h;
-    }
 }
