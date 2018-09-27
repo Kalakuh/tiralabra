@@ -24,7 +24,7 @@ public class ListTest {
     }
     
     /**
-     * Test adding a number
+     * Test adding a number.
      */
     @Test
     public void testAdd() {
@@ -33,7 +33,7 @@ public class ListTest {
     }
     
     /**
-     * Test adding multiple numbers
+     * Test adding multiple numbers.
      */
     @Test
     public void testAddMultiple() {
@@ -41,5 +41,16 @@ public class ListTest {
         instance.add(25);
         instance.add(125);
         assertEquals((Integer) 125, instance.get(2));
+    }
+    
+    /**
+     * Test adding multiple numbers and then getting size.
+     */
+    @Test
+    public void testSize() {
+        instance.add(5);
+        instance.add(25);
+        instance.add(125);
+        assertEquals(3, instance.getSize());
     }
 }
