@@ -52,7 +52,6 @@ public class HashMap<T, S> {
      * The hashmap has become too slow and needs to increase its size
      */
     private void expand() {
-        System.out.println("exp");
         List<T> oldKeys = new List<>();
         List<S> oldValues = new List<>();
         for (int i = 0; i < arrayLength; i++) {
@@ -79,14 +78,11 @@ public class HashMap<T, S> {
     public void put(T key, S value) {
         for (int k = 0; k < MAX_STEPS; k++) {
             int keyHash = hash(key, k);
-            System.out.println(key.toString() + " has hash " + keyHash + " with offset " + k);
             if (keys.get(keyHash) == null) {
-                System.out.println(key.toString() + " !");
                 keys.set(keyHash, key);
                 values.set(keyHash, value);
                 return;
             } else if (keys.get(keyHash).equals(key)) {
-                System.out.println(key.toString() + " ?");
                 values.set(keyHash, value);
                 return;
             }

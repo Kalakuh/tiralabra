@@ -3,7 +3,7 @@ package bbt.testing;
 import bbt.util.Pair;
 import bbt.datastructure.BinaryTree;
 import bbt.util.List;
-import java.util.HashMap;
+import bbt.util.HashMap;
 
 /*
  * Input uses the following format:
@@ -55,7 +55,7 @@ public abstract class Test {
      */
     private void insert(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
         tree.insert(key);
-        if (!map.containsKey(key)) {
+        if (map.get(key) == null) {
             map.put(key, 0);
         }
         map.put(key, map.get(key) + 1);
@@ -69,7 +69,7 @@ public abstract class Test {
      * @return true if consistent with checker
      */
     private boolean checkContains(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
-        if (!map.containsKey(key)) {
+        if (map.get(key) == null) {
             map.put(key, 0);
         }
         if ((map.get(key) != 0) != tree.contains(key)) {
@@ -86,7 +86,7 @@ public abstract class Test {
      */
     private void erase(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
         boolean b = tree.erase(key);
-        if (!map.containsKey(key)) {
+        if (map.get(key) == null) {
             map.put(key, 0);
         }
         if (map.get(key) > 0) {
