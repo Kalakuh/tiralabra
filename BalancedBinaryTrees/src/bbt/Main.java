@@ -9,13 +9,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Test test = new RandomNCommandsTest(1000000, 1);
+        
         Tester avlTester = new Tester(new AVLTree());
-        avlTester.runTest(new InsertCheckEraseNTest(1000000));
+        avlTester.runTest(test);
         
         Tester treapTester = new Tester(new Treap());
-        treapTester.runTest(new InsertCheckEraseNTest(1000000));
+        treapTester.runTest(test);
         
         Tester scapegoatTester = new Tester(new ScapegoatTree());
-        scapegoatTester.runTest(new InsertCheckEraseNTest(1000000));
+        scapegoatTester.runTest(test);
     }
 }
