@@ -9,8 +9,14 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class Main {
+    private static final String INSERT = "insert";
+    private static final String CONTAINS = "contains";
+    private static final String ERASE = "erase";
+    private static final String EXIT = "exit";
+    
     private static ByteArrayOutputStream baos;
     private static boolean interactive;
     private static boolean fileInput;
@@ -110,7 +116,7 @@ public class Main {
         } else if (interactive && gui) {
             System.out.println("Flags '-i' and '-g' can not be used at the same time.");
         } else if (interactive) {
-            
+            runInteractive();
         } else if (fileInput) {
             
         } else if (gui) {
@@ -127,6 +133,38 @@ public class Main {
 
             Tester scapegoatTester = new Tester(new ScapegoatTree());
             scapegoatTester.runTest(test);
+        }
+    }
+    
+    private static void runInteractive() {
+        Scanner scanner = new Scanner(System.in);
+        BinaryTree<Integer> tree = new Treap<>();
+        while (true) {
+            System.err.print(">>> ");
+            String cmd = scanner.next();
+            if (cmd.equals(EXIT)) {
+                break;
+            }
+            if (cmd.matches(INSERT + "|" + CONTAINS + "|" + ERASE)) {
+                try {
+                    int n = Integer.parseInt(scanner.next());
+                    switch (cmd) {
+                        case INSERT:
+                            tree.insert(n);
+                            break;
+                        case CONTAINS:
+                            System.out.println(tree.contains(n));
+                            break;
+                        case ERASE:
+                            tree.erase(n);
+                            break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("The value after the command was not an integer.");
+                }
+            } else {
+                System.out.println("Unknown command.");
+            }
         }
     }
 }
