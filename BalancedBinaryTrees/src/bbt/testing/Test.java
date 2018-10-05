@@ -29,15 +29,19 @@ public abstract class Test {
         
         for (int i = 0; i < input.getSize(); i++) {
             Pair<String, Integer> pair = input.get(i);
-            if (pair.getFirst().equals(INSERT)) {
-                this.insert(tree, pair.getSecond(), map);
-            } else if (pair.getFirst().equals(CONTAINS)) {
-                success = this.contains(tree, pair.getSecond(), map) || success;
-            } else if (pair.getFirst().equals(ERASE)) {
-                this.erase(tree, pair.getSecond(), map);
-            } else {
-                System.out.println("Unknown command in the test: " + pair.getFirst());
-                throw new Error();
+            switch (pair.getFirst()) {
+                case INSERT:
+                    this.insert(tree, pair.getSecond(), map);
+                    break;
+                case CONTAINS:
+                    success = this.checkContains(tree, pair.getSecond(), map) || success;
+                    break;
+                case ERASE:
+                    this.erase(tree, pair.getSecond(), map);
+                    break;
+                default:
+                    System.out.println("Unknown command in the test: " + pair.getFirst());
+                    throw new Error();
             }
         }
         return success;
@@ -64,7 +68,7 @@ public abstract class Test {
      * @param map Map for checker
      * @return true if consistent with checker
      */
-    private boolean contains(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
+    private boolean checkContains(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
         if (!map.containsKey(key)) {
             map.put(key, 0);
         }
@@ -81,11 +85,13 @@ public abstract class Test {
      * @param map Map for checker
      */
     private void erase(BinaryTree<Integer> tree, Integer key, HashMap<Integer, Integer> map) {
-        tree.insert(key);
+        boolean b = tree.erase(key);
         if (!map.containsKey(key)) {
             map.put(key, 0);
         }
-        map.put(key, map.get(key) + 1);
+        if (map.get(key) > 0) {
+            map.put(key, map.get(key) - 1);
+        }
     }
     
     /**
