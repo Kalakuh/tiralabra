@@ -28,4 +28,9 @@ public class InsertCheckEraseNTest extends Test {
         }
         return input;
     }
+    
+    @Override
+    public String toString() {
+        return "(n = " + this.n + ")";
+    }
 }

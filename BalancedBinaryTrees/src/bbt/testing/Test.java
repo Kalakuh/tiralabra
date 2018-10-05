@@ -99,4 +99,9 @@ public abstract class Test {
      * @return Test data
      */
     protected abstract List<Pair<String, Integer>> getInput();
+    
+    @Override
+    public String toString() {
+        return "()";
+    }
 }

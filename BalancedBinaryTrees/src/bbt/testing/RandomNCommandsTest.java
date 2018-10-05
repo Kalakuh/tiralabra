@@ -40,4 +40,9 @@ public class RandomNCommandsTest extends Test {
         }
         return input;
     }
+    
+    @Override
+    public String toString() {
+        return "(n = " + this.n + ", k = " + this.k + ", seed = " + this.seed + ")";
+    }
 }

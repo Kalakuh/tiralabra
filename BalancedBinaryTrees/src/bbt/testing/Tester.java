@@ -28,7 +28,7 @@ public class Tester {
         double spentSeconds = (endTime - startTime) / 1000.0;
         System.out.println("----- TESTING -----");
         System.out.println("Tree: " + tree.getClass().getSimpleName());
-        System.out.println("Test: " + test.getClass().getSimpleName());
+        System.out.println("Test: " + test.getClass().getSimpleName() + test);
         System.out.println("Correct: " + success);
         System.out.format("Time: %.3fs\n", spentSeconds);
         System.out.println("-------------------");
