@@ -12,14 +12,15 @@ import java.io.PrintStream;
 
 public class Main {
     private static ByteArrayOutputStream baos;
-    private static boolean interactive = false;
-    private static boolean fileInput = false;
-    private static String inputPath = "";
-    private static boolean fileOutput = false;
-    private static String outputPath = "";
-    private static boolean gui = false;
+    private static boolean interactive;
+    private static boolean fileInput;
+    private static String inputPath;
+    private static boolean fileOutput;
+    private static String outputPath;
+    private static boolean gui;
     
     private static void init() {
+        baos = null;
         interactive = false;
         fileInput = false;
         inputPath = "";
@@ -38,39 +39,14 @@ public class Main {
      */
     public static void main(String[] args) {
         init();
-        analyseArgs(args);
+        analyzeArgs(args);
         
         if (fileOutput) {
             baos = new ByteArrayOutputStream();
             System.setOut(new PrintStream(baos));
         }
-        if (fileInput && interactive && gui) {
-            System.out.println("Flags '-f', '-i' and '-g' can not be used at the same time.");
-        } else if (fileInput && interactive) {
-            System.out.println("Flags '-f' and '-i' can not be used at the same time.");
-        } else if (fileInput && gui) {
-            System.out.println("Flags '-f' and '-g' can not be used at the same time.");
-        } else if (interactive && gui) {
-            System.out.println("Flags '-i' and '-g' can not be used at the same time.");
-        } else if (interactive) {
-            
-        } else if (fileInput) {
-            
-        } else if (gui) {
-            System.out.println("Graphical user interface has not been implemented yet.");
-        } else {
-            System.out.println("No special flags were found - running default tests.");
-            Test test = new RandomNCommandsTest(1000000, 1);
-
-            Tester avlTester = new Tester(new AVLTree());
-            avlTester.runTest(test);
-
-            Tester treapTester = new Tester(new Treap());
-            treapTester.runTest(test);
-
-            Tester scapegoatTester = new Tester(new ScapegoatTree());
-            scapegoatTester.runTest(test);
-        }
+        
+        run();
         
         try {
             if (fileOutput) {
@@ -84,7 +60,11 @@ public class Main {
         }
     }
     
-    private static void analyseArgs(String[] args) {
+    /**
+     * Analyze arguments and enable flags.
+     * @param args Arguments from command line
+     */
+    private static void analyzeArgs(String[] args) {
         String previousArg = "";
         for (String arg : args) {
             switch (arg) {
@@ -114,6 +94,39 @@ public class Main {
                     }
             }
             previousArg = arg;
+        }
+    }
+    
+    /**
+     * Select the running mode based on the flags and then run.
+     */
+    private static void run() {
+        if (fileInput && interactive && gui) {
+            System.out.println("Flags '-f', '-i' and '-g' can not be used at the same time.");
+        } else if (fileInput && interactive) {
+            System.out.println("Flags '-f' and '-i' can not be used at the same time.");
+        } else if (fileInput && gui) {
+            System.out.println("Flags '-f' and '-g' can not be used at the same time.");
+        } else if (interactive && gui) {
+            System.out.println("Flags '-i' and '-g' can not be used at the same time.");
+        } else if (interactive) {
+            
+        } else if (fileInput) {
+            
+        } else if (gui) {
+            System.out.println("Graphical user interface has not been implemented yet.");
+        } else {
+            System.out.println("No special flags were found - running default tests.");
+            Test test = new RandomNCommandsTest(1000000, 1);
+
+            Tester avlTester = new Tester(new AVLTree());
+            avlTester.runTest(test);
+
+            Tester treapTester = new Tester(new Treap());
+            treapTester.runTest(test);
+
+            Tester scapegoatTester = new Tester(new ScapegoatTree());
+            scapegoatTester.runTest(test);
         }
     }
 }
