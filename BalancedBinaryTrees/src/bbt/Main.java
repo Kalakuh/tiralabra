@@ -1,6 +1,7 @@
 package bbt;
 
 import bbt.datastructure.*;
+import bbt.gui.GUI;
 import bbt.testing.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,6 +26,8 @@ public class Main {
     private static String outputPath;
     private static boolean gui;
     
+    private static Test[] tests;
+    
     private static void init() {
         baos = null;
         interactive = false;
@@ -33,6 +36,11 @@ public class Main {
         fileOutput = false;
         outputPath = "";
         gui = false;
+        
+        tests = new Test[]{
+            new InsertCheckEraseNTest(1000000),
+            new RandomNCommandsTest(1000000, 5)
+        };
     }
     
     /**
@@ -114,22 +122,25 @@ public class Main {
             error("Flags '-f' and '-g' can not be used at the same time.");
         } else if (interactive && gui) {
             error("Flags '-i' and '-g' can not be used at the same time.");
+        } else if (fileOutput && gui) {
+            error("Flags '-o' and '-g' can not be used at the same time.");
         } else if (interactive || fileInput) {
-            runWithInput();            
+            runWithInput();
         } else if (gui) {
-            error("Graphical user interface has not been implemented yet.");
+            GUI gui = new GUI();
+            gui.open();
         } else {
             System.out.println("No special flags were found - running default tests.");
-            Test test = new RandomNCommandsTest(1000000, 1);
-
-            Tester avlTester = new Tester(new AVLTree());
-            avlTester.runTest(test);
-
-            Tester treapTester = new Tester(new Treap());
-            treapTester.runTest(test);
-
-            Tester scapegoatTester = new Tester(new ScapegoatTree());
-            scapegoatTester.runTest(test);
+            for (Test test : tests) {
+                Tester avlTester = new Tester(new AVLTree());
+                avlTester.runTest(test);
+            
+                Tester treapTester = new Tester(new Treap());
+                treapTester.runTest(test);
+            
+                Tester scapegoatTester = new Tester(new ScapegoatTree());
+                scapegoatTester.runTest(test);
+            }
         }
     }
     
