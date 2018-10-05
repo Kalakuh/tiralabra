@@ -3,7 +3,7 @@ package bbt.datastructure;
 import bbt.util.List;
 
 public class ScapegoatTree<T> extends BinaryTree {
-    private static final double ALPHA = 0.85;
+    private double alpha;
     private int size = 0;
     private int maxSize = 0;
     private ScapegoatTree<T> parent;
@@ -12,7 +12,12 @@ public class ScapegoatTree<T> extends BinaryTree {
      * Constructor for a new scapegoat tree.
      */
     public ScapegoatTree() {
+        this(0.85);
+    }
+    
+    public ScapegoatTree(double alpha) {
         super();
+        this.alpha = alpha;
         parent = null;
     }
     
@@ -42,23 +47,23 @@ public class ScapegoatTree<T> extends BinaryTree {
         this.maxSize = Math.max(this.maxSize, this.size);
         if (this.getValue() == null) {
             this.setValue((Comparable) element);
-            findScapegoat = depth > Math.log(treeSize) / Math.log(1 / ALPHA) ? 1 : 0;
+            findScapegoat = depth > Math.log(treeSize) / Math.log(1 / alpha) ? 1 : 0;
         } else if (this.getValue().compareTo((Comparable) element) >= 0) {
             if (this.getLeftChild() == null) {
-                ScapegoatTree<T> child = new ScapegoatTree<>();
+                ScapegoatTree<T> child = new ScapegoatTree<>(alpha);
                 child.setParent(this);
                 this.setLeftChild(child);
             }
             findScapegoat = ((ScapegoatTree<T>) this.getLeftChild()).insertHelper(element, depth + 1, treeSize);
         } else {
             if (this.getRightChild() == null) {
-                ScapegoatTree<T> child = new ScapegoatTree<>();
+                ScapegoatTree<T> child = new ScapegoatTree<>(alpha);
                 child.setParent(this);
                 this.setRightChild(child);
             }
             findScapegoat = ((ScapegoatTree<T>) this.getRightChild()).insertHelper(element, depth + 1, treeSize);
         }
-        if (findScapegoat == 1 && this.parent != null && this.getSize() > ALPHA * this.parent.getSize()) {
+        if (findScapegoat == 1 && this.parent != null && this.getSize() > alpha * this.parent.getSize()) {
             findScapegoat = 2;
         } else if (findScapegoat == 2) {
             findScapegoat = 0;
@@ -112,7 +117,7 @@ public class ScapegoatTree<T> extends BinaryTree {
             
             List<ScapegoatTree<T>> smaller = new List<>();
             List<ScapegoatTree<T>> larger = new List<>();
-            ScapegoatTree<T> tree = new ScapegoatTree<>();
+            ScapegoatTree<T> tree = new ScapegoatTree<>(children.get(mid).getAlpha());
             
             tree.copyFrom(children.get(mid));
             tree.setParent(parent);
@@ -152,7 +157,7 @@ public class ScapegoatTree<T> extends BinaryTree {
             }
         }
         if (this.parent == null) { // i.e. this node is root
-            if (this.size < ALPHA * this.maxSize) {
+            if (this.size < alpha * this.maxSize) {
                 this.rebuildRoot();
             }
         }
@@ -175,7 +180,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     
     @Override
     protected BinaryTree create() {
-        return new ScapegoatTree();
+        return new ScapegoatTree(this.alpha);
     }
     
     /**
@@ -217,5 +222,13 @@ public class ScapegoatTree<T> extends BinaryTree {
     public void clear() {
         this.size = 0;
         super.clear();
+    }
+    
+    /**
+     * Returns alpha.
+     * @return alpha value
+     */
+    public double getAlpha() {
+        return this.alpha;
     }
 }
