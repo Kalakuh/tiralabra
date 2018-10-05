@@ -61,8 +61,7 @@ public class Main {
                 writer.close();
             }
         } catch (IOException e) {
-            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-            System.out.println("An error happened while trying to output the results into a file.");
+            error("An error happened while trying to output the results into a file.");
         }
     }
     
@@ -92,10 +91,10 @@ public class Main {
                     } else if (previousArg.equals("-f")) {
                         inputPath = arg;
                     } else if (arg.startsWith("-")) {
-                        System.out.println("Unknown flag '" + arg + "'.");
+                        error("Unknown flag '" + arg + "'.");
                         return;
                     } else {
-                        System.out.println("Unknown argument '" + arg + "'.");
+                        error("Unknown argument '" + arg + "'.");
                         return;    
                     }
             }
@@ -108,19 +107,17 @@ public class Main {
      */
     private static void run() {
         if (fileInput && interactive && gui) {
-            System.out.println("Flags '-f', '-i' and '-g' can not be used at the same time.");
+            error("Flags '-f', '-i' and '-g' can not be used at the same time.");
         } else if (fileInput && interactive) {
-            System.out.println("Flags '-f' and '-i' can not be used at the same time.");
+            error("Flags '-f' and '-i' can not be used at the same time.");
         } else if (fileInput && gui) {
-            System.out.println("Flags '-f' and '-g' can not be used at the same time.");
+            error("Flags '-f' and '-g' can not be used at the same time.");
         } else if (interactive && gui) {
-            System.out.println("Flags '-i' and '-g' can not be used at the same time.");
-        } else if (interactive) {
-            runInteractive();
-        } else if (fileInput) {
-            
+            error("Flags '-i' and '-g' can not be used at the same time.");
+        } else if (interactive || fileInput) {
+            runWithInput();            
         } else if (gui) {
-            System.out.println("Graphical user interface has not been implemented yet.");
+            error("Graphical user interface has not been implemented yet.");
         } else {
             System.out.println("No special flags were found - running default tests.");
             Test test = new RandomNCommandsTest(1000000, 1);
@@ -136,11 +133,27 @@ public class Main {
         }
     }
     
-    private static void runInteractive() {
-        Scanner scanner = new Scanner(System.in);
+    /**
+     * Use either interactive input or file input
+     */
+    private static void runWithInput() {
+        Scanner scanner;
+        if (interactive) {
+            scanner = new Scanner(System.in);
+        } else {
+            try {
+                scanner = new Scanner(new File(inputPath));
+            } catch (IOException e) {
+                error("An error happened with input file.");
+                error(e.toString());
+                return;
+            }
+        }
         BinaryTree<Integer> tree = new Treap<>();
-        while (true) {
-            System.err.print(">>> ");
+        while (scanner.hasNext()) {
+            if (interactive) {
+                System.err.print(">>> ");
+            }
             String cmd = scanner.next();
             if (cmd.equals(EXIT)) {
                 break;
@@ -160,11 +173,27 @@ public class Main {
                             break;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("The value after the command was not an integer.");
+                    error("The value after the command was not an integer.");
+                    if (fileInput) {
+                        break;
+                    }
                 }
             } else {
-                System.out.println("Unknown command.");
+                error("Unknown command '" + cmd + "'." + scanner);
+                if (fileInput) {
+                   break;
+                }
             }
         }
+        scanner.close();
+    }
+    
+    /**
+     * Output an error message to stdout
+     * @param s error message
+     */
+    private static void error(String s) {
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+        System.out.println(s);
     }
 }
