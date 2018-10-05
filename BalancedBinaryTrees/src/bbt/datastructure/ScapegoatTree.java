@@ -15,8 +15,15 @@ public class ScapegoatTree<T> extends BinaryTree {
         this(0.85);
     }
     
+    /**
+     * Constructor for a new scapegoat tree with alpha paremeter
+     * @param alpha Tree will be alpha-weight-balanced and alpha-height-balanced, 0.5 < alpha < 1.
+     */
     public ScapegoatTree(double alpha) {
         super();
+        if (alpha <= 0.5 || alpha >= 1) {
+            throw new IllegalArgumentException("ScapegoatTree may use only alpha values such that 0.5 < alpha < 1");
+        }
         this.alpha = alpha;
         parent = null;
     }
