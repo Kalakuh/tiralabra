@@ -1,6 +1,7 @@
 package bbt.testing;
 
 import bbt.datastructure.BinaryTree;
+import bbt.util.Pair;
 
 // The tests will assume that the datatype of nodes is Integer
 
@@ -21,11 +22,11 @@ public class Tester {
      */
     public void runTest(Test test) {
         tree.clear();
-        long startTime = System.currentTimeMillis();
-        boolean success = test.run(tree);
+        Pair<Boolean, Long> result = test.run(tree);
+        boolean success = result.getFirst();
+        long time = result.getSecond();
         
-        long endTime = System.currentTimeMillis();
-        double spentSeconds = (endTime - startTime) / 1000.0;
+        double spentSeconds = time / 1000.0;
         System.out.println("----- TESTING -----");
         System.out.println("Tree: " + tree.getClass().getSimpleName());
         System.out.println("Test: " + test.getClass().getSimpleName() + test);
