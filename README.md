@@ -9,6 +9,7 @@ Projekti on tehty Helsingin Yliopiston kurssia [Aineopintojen harjoitustyö: Tie
 * [Viikkoraportti 2](https://github.com/Kalakuh/tiralabra/blob/master/Dokumentaatio/viikkoraportti2.pdf)
 * [Viikkoraportti 3](https://github.com/Kalakuh/tiralabra/blob/master/Dokumentaatio/viikkoraportti3.pdf)
 * [Viikkoraportti 4](https://github.com/Kalakuh/tiralabra/blob/master/Dokumentaatio/viikkoraportti4.pdf)
+* [Viikkoraportti 5](https://github.com/Kalakuh/tiralabra/blob/master/Dokumentaatio/viikkoraportti5.pdf)
 
 ## Dokumentaatio
 * [Määrittelydokumentti](https://github.com/Kalakuh/tiralabra/blob/master/Dokumentaatio/maarittely.pdf)
