@@ -38,8 +38,24 @@ public class Main {
         gui = false;
         
         tests = new Test[]{
-            new InsertCheckEraseNTest(1000000),
-            new RandomNCommandsTest(1000000, 5)
+            new InsertAndThenRandomTest(10, 10, 1),
+            new InsertAndThenRandomTest(100, 100, 1),
+            new InsertAndThenRandomTest(1000, 1000, 1),
+            new InsertAndThenRandomTest(10000, 10000, 1),
+            new InsertAndThenRandomTest(100000, 100000, 1),
+            new InsertAndThenRandomTest(1000000, 1000000, 1),
+            new InsertAndThenRandomTest(10, 10, 100),
+            new InsertAndThenRandomTest(100, 100, 100),
+            new InsertAndThenRandomTest(1000, 1000, 100),
+            new InsertAndThenRandomTest(10000, 10000, 100),
+            new InsertAndThenRandomTest(100000, 100000, 100),
+            new InsertAndThenRandomTest(1000000, 1000000, 100),
+            new InsertAndThenRandomTest(10, 10, 1000000),
+            new InsertAndThenRandomTest(100, 100, 1000000),
+            new InsertAndThenRandomTest(1000, 1000, 1000000),
+            new InsertAndThenRandomTest(10000, 10000, 1000000),
+            new InsertAndThenRandomTest(100000, 100000, 1000000),
+            new InsertAndThenRandomTest(1000000, 1000000, 1000000),
         };
     }
     

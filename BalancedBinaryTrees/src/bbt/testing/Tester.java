@@ -27,11 +27,10 @@ public class Tester {
         long time = result.getSecond();
         
         double spentSeconds = time / 1000.0;
-        System.out.println("----- TESTING -----");
+        System.out.println("----- TEST -----");
         System.out.println("Tree: " + tree.getClass().getSimpleName());
         System.out.println("Test: " + test.getClass().getSimpleName() + test);
         System.out.println("Correct: " + success);
         System.out.format("Time: %.3fs\n", spentSeconds);
-        System.out.println("-------------------");
     }
 }
