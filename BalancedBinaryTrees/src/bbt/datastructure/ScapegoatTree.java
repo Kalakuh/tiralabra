@@ -77,7 +77,7 @@ public class ScapegoatTree<T> extends BinaryTree {
             
             boolean left = this.getParent().getLeftChild() == this;
             List<ScapegoatTree<T>> children = this.inOrderTraversal();
-            ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent);
+            ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent, 0, children.getSize() - 1);
             this.setParent(newThis.getParent());
             this.copyFrom(newThis);
             if (this.parent != null) {
@@ -118,27 +118,18 @@ public class ScapegoatTree<T> extends BinaryTree {
      * @param parent parent of the current node
      * @return new root of the tree
      */
-    private static <T> ScapegoatTree<T> rebuild(List<ScapegoatTree<T>> children, ScapegoatTree<T> parent) {
-        if (children.getSize() > 0) {
-            int mid = children.getSize() / 2;
+    private static <T> ScapegoatTree<T> rebuild(List<ScapegoatTree<T>> children, ScapegoatTree<T> parent, int left, int right) {
+        if (left <= right) {
+            int mid = (left + right) / 2;
             
-            List<ScapegoatTree<T>> smaller = new List<>();
-            List<ScapegoatTree<T>> larger = new List<>();
             ScapegoatTree<T> tree = new ScapegoatTree<>(children.get(mid).getAlpha());
             
             tree.copyFrom(children.get(mid));
             tree.setParent(parent);
-            tree.setSize(children.getSize());
-            
-            for (int i = 0; i < mid; i++) {
-                smaller.add(children.get(i));
-            }
-            for (int i = mid + 1; i < children.getSize(); i++) {
-                larger.add(children.get(i));
-            }
+            tree.setSize(right - left + 1);
 
-            tree.setLeftChild(ScapegoatTree.rebuild(smaller, tree));
-            tree.setRightChild(ScapegoatTree.rebuild(larger, tree));
+            tree.setLeftChild(ScapegoatTree.rebuild(children, tree, left, mid - 1));
+            tree.setRightChild(ScapegoatTree.rebuild(children, tree, mid + 1, right));
             
             return tree;
         }
@@ -176,7 +167,7 @@ public class ScapegoatTree<T> extends BinaryTree {
     private void rebuildRoot() {
         this.maxSize = this.size;
         List<ScapegoatTree<T>> children = this.inOrderTraversal();
-        ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent);
+        ScapegoatTree<T> newThis = ScapegoatTree.rebuild(children, parent, 0, children.getSize() - 1);
         
         ScapegoatTree<T> leftChild = (ScapegoatTree<T>) newThis.getLeftChild();
         this.setLeftChild(leftChild);
