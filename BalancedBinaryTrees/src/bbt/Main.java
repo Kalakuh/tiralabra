@@ -1,7 +1,6 @@
 package bbt;
 
 import bbt.datastructure.*;
-import bbt.gui.GUI;
 import bbt.testing.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -108,7 +107,8 @@ public class Main {
                     break;
                 case "-g":
                     gui = true;
-                    break;
+                    error("Graphical user interface has been removed. Please use terminal.");
+                    return;
                 default:
                     if (previousArg.equals("-o")) {
                         outputPath = arg;
@@ -142,9 +142,6 @@ public class Main {
             error("Flags '-o' and '-g' can not be used at the same time.");
         } else if (interactive || fileInput) {
             runWithInput();
-        } else if (gui) {
-            GUI gui = new GUI();
-            gui.open();
         } else {
             System.out.println("No special flags were found - running default tests.");
             for (Test test : tests) {
