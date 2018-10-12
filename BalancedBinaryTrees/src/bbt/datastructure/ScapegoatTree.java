@@ -112,10 +112,12 @@ public class ScapegoatTree<T> extends BinaryTree {
     }
     
     /**
-     * Rebuilds as balanced binary tree as possible.
+     * Rebuilds as balanced binary tree as possible using nodes of list 'children' in range [left, right].
      * @param <T> type of values in the tree
      * @param children list of children
      * @param parent parent of the current node
+     * @param left smallest index of the used range
+     * @param right largest index of the used range
      * @return new root of the tree
      */
     private static <T> ScapegoatTree<T> rebuild(List<ScapegoatTree<T>> children, ScapegoatTree<T> parent, int left, int right) {
